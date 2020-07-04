@@ -1,19 +1,22 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocStore.Core.Entities
 {
     public class Doc
     {
-        public string CollectionName = "";
-        public DateTime CreatedAt;
-        public string CreatedBy = "";
-        public DateTime? DeletedAt;
-        public string DeletedBy = "";
-        public string Id = "";
-        public bool IsDeleted = false;
-        public string JsonData = "";
-        public string Name = "";
-        public DateTime? UpdatedAt;
-        public string UpdatedBy = "";
+        public string CollectionName { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+        public string CreatedBy { get; set; } = "";
+        public DateTime? DeletedAt { get; set; }
+        public string DeletedBy { get; set; } = "";
+        
+        [Key]
+        public string Id { get; set; } = "";
+        public bool IsDeleted { get; set; } = false;
+        public string JsonData { get; set; } = "";
+        public string Name { get; set; } = "";
+        public DateTime? UpdatedAt { get; set; }
+        public string UpdatedBy { get; set; } = "";
     }
 }

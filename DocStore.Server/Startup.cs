@@ -25,7 +25,7 @@ namespace DocStore.Server
             services.Configure<AppSettings>(appSettingsSection);
             services.AddControllersWithViews();
             services.AddDbContextPool<EfContext>(
-                options => options.UseNpgsql(appSettings.ConnectionString)
+                options => options.UseNpgsql(appSettings.ConnectionString, b => b.MigrationsAssembly("DocStore.Server"))
             );
         }
 
