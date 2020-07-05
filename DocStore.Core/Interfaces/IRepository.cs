@@ -1,6 +1,5 @@
-﻿using DocStore.Core.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DocStore.Core.Entities;
 
 namespace DocStore.Core.Interfaces
 {

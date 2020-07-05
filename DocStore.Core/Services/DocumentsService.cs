@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using DocStore.Core.Entities;
 using DocStore.Core.Enums;
 using DocStore.Core.Interfaces;
@@ -6,8 +6,6 @@ using DocStore.Core.Requests;
 using DocStore.Core.Responses;
 using DocStore.Core.Utilities;
 using DocStore.Core.Validators;
-using System;
-using System.Threading.Tasks;
 
 namespace DocStore.Core.Services
 {
@@ -18,12 +16,11 @@ namespace DocStore.Core.Services
         public DocumentsService(IRepository<Doc> repository)
         {
             Require.ObjectNotNull(repository, "repository should be defined");
-            this._repository = repository;
+            _repository = repository;
         }
 
         public NewRecordResponse AddDocument(AddDocumentCommand command)
         {
-
             var response = new NewRecordResponse
             {
                 Code = ResponseCode.Success

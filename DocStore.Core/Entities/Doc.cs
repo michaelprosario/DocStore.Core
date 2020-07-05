@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace DocStore.Core.Entities
 {
@@ -11,9 +10,9 @@ namespace DocStore.Core.Entities
         public string CreatedBy { get; set; } = "";
         public DateTime? DeletedAt { get; set; }
         public string DeletedBy { get; set; } = "";
-        
-        [Key]
-        public string Id { get; set; } = "";
+
+        [Key] public string Id { get; set; } = "";
+
         public bool IsDeleted { get; set; } = false;
         public string JsonData { get; set; } = "";
         public string Name { get; set; } = "";

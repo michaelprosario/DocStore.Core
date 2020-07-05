@@ -1,3 +1,4 @@
+using System;
 using DocStore.Core.Entities;
 using DocStore.Core.Interfaces;
 using DocStore.Core.Services;
@@ -15,7 +16,7 @@ namespace DocStore.Server
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration ?? throw new System.ArgumentNullException(nameof(configuration));
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public IConfiguration Configuration { get; }

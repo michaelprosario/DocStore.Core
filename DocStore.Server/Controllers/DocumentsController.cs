@@ -16,30 +16,30 @@ namespace DocStore.Server.Controllers
             _documentsService = documentsService ?? throw new ArgumentNullException(nameof(documentsService));
         }
 
-        string getUserName()
+        private string GetUserName()
         {
             return "fixme";
         }
 
         [HttpPost("AddDocument")]
-        public NewRecordResponse AddDocument([FromBody]AddDocumentCommand command)
+        public NewRecordResponse AddDocument([FromBody] AddDocumentCommand command)
         {
             Require.ObjectNotNull(command, "command should not be null");
-            command.UserId = getUserName();
+            command.UserId = GetUserName();
             return _documentsService.AddDocument(command);
         }
 
         [HttpPost("EditDocument")]
         public Response EditDocument([FromBody] UpdateDocumentCommand command)
         {
-            command.UserId = getUserName();
+            command.UserId = GetUserName();
             return _documentsService.UpdateDocument(command);
         }
 
         [HttpPost("DeleteDocument")]
         public Response DeleteDocument([FromBody] DeleteDocumentCommand command)
         {
-            command.UserId = getUserName();
+            command.UserId = GetUserName();
             return _documentsService.DeleteDocument(command);
         }
 
@@ -54,9 +54,9 @@ namespace DocStore.Server.Controllers
         [HttpPost("GetDocument")]
         public GetDocumentResponse GetDocument([FromBody] GetDocumentQuery query)
         {
-            query.UserId = getUserName();
+            Require.ObjectNotNull(query, "query should not be null");
+            query.UserId = GetUserName();
             return _documentsService.GetDocument(query);
         }
-
     }
 }

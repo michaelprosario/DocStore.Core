@@ -1,6 +1,5 @@
 ﻿using DocStore.Core.Requests;
 using DocStore.Core.Responses;
-using System.Threading.Tasks;
 
 namespace DocStore.Core.Services
 {

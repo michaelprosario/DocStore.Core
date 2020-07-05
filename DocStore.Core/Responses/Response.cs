@@ -10,8 +10,8 @@ namespace DocStore.Core.Responses
     {
         public Response()
         {
-            this.Code = ResponseCode.Success;
-            this.Message = "";
+            Code = ResponseCode.Success;
+            Message = "";
         }
 
         [DataMember] public ResponseCode Code { get; set; }
