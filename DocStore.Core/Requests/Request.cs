@@ -2,9 +2,14 @@
 
 namespace DocStore.Core.Requests
 {
-    [DataContract]
+    
     public class Request
     {
-        [DataMember] public string UserId { get; set; }
+        public Request()
+        {
+
+        }
+
+        public string UserId { get; set; }
     }
 }

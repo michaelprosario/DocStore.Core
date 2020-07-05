@@ -8,6 +8,12 @@ namespace DocStore.Core.Responses
     [DataContract]
     public class Response
     {
+        public Response()
+        {
+            this.Code = ResponseCode.Success;
+            this.Message = "";
+        }
+
         [DataMember] public ResponseCode Code { get; set; }
 
         [DataMember] public string Message { get; set; }

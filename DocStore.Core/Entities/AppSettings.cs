@@ -1,4 +1,4 @@
-﻿namespace DocStore.Server
+﻿namespace DocStore.Core.Entities
 {
     public class AppSettings
     {

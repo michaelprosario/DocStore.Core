@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace DocStore.Core.Entities
 {
-    public class Doc
+    public class Doc : BaseEntity
     {
         public string CollectionName { get; set; } = "";
         public DateTime CreatedAt { get; set; }

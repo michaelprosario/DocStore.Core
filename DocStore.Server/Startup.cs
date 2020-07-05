@@ -1,3 +1,6 @@
+using DocStore.Core.Entities;
+using DocStore.Core.Interfaces;
+using DocStore.Core.Services;
 using DocStore.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +15,7 @@ namespace DocStore.Server
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration ?? throw new System.ArgumentNullException(nameof(configuration));
         }
 
         public IConfiguration Configuration { get; }
@@ -23,10 +26,14 @@ namespace DocStore.Server
             var appSettingsSection = Configuration.GetSection("AppSettings");
             var appSettings = appSettingsSection.Get<AppSettings>();
             services.Configure<AppSettings>(appSettingsSection);
-            services.AddControllersWithViews();
             services.AddDbContextPool<EfContext>(
                 options => options.UseNpgsql(appSettings.ConnectionString, b => b.MigrationsAssembly("DocStore.Server"))
             );
+
+            services.AddControllersWithViews();
+            services.AddSingleton<AppSettingsLoader>();
+            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IDocumentsService), typeof(DocumentsService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
