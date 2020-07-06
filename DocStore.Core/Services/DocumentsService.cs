@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DocStore.Core.Entities;
 using DocStore.Core.Enums;
 using DocStore.Core.Interfaces;
@@ -11,12 +12,15 @@ namespace DocStore.Core.Services
 {
     public class DocumentsService : IDocumentsService
     {
+        private readonly IDocumentsRepository _documentsRepository;
         private readonly IRepository<Doc> _repository;
 
-        public DocumentsService(IRepository<Doc> repository)
+        public DocumentsService(IRepository<Doc> repository, IDocumentsRepository documentsRepository)
         {
             Require.ObjectNotNull(repository, "repository should be defined");
+            Require.ObjectNotNull(documentsRepository, "documentsRepository should be defined");
             _repository = repository;
+            _documentsRepository = documentsRepository;
         }
 
         public NewRecordResponse AddDocument(AddDocumentCommand command)
@@ -67,6 +71,27 @@ namespace DocStore.Core.Services
             _repository.Update(command.Document);
 
             return response;
+        }
+
+        public GetDocumentsResponse GetDocumentsByCollection(GetDocumentsByCollection query)
+        {
+            Require.ObjectNotNull(query, "query is required");
+            var validationResult = new GetDocumentsByCollectionQueryValidator().Validate(query);
+            if (!validationResult.IsValid)
+            {
+                var response = new GetDocumentsResponse
+                {
+                    Code = ResponseCode.BadRequest,
+                    ValidationErrors = validationResult.Errors
+                };
+                return response;
+            }
+
+            var list = _documentsRepository.GetDocumentsByCollection(query.Collection);
+            return new GetDocumentsResponse
+            {
+                Documents = list.ToList()
+            };
         }
 
         public GetDocumentResponse GetDocument(GetDocumentQuery query)

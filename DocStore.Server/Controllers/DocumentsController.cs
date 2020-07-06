@@ -43,13 +43,13 @@ namespace DocStore.Server.Controllers
             return _documentsService.DeleteDocument(command);
         }
 
-        /*
-        [HttpPost("ListDocuments")]
-        public async Task<ListDocumentsResponse> ListDocumentsAsync([FromBody] ListDocumentsQuery query)
+        [HttpPost("GetDocumentsByCollection")]
+        public GetDocumentsResponse GetDocumentsByCollection([FromBody] GetDocumentsByCollection query)
         {
+            Require.ObjectNotNull(query, "query is null");
             query.UserId = GetUserName();
-            return await _mediator.Send(query);
-        }*/
+            return _documentsService.GetDocumentsByCollection(query);
+        }
 
         [HttpPost("GetDocument")]
         public GetDocumentResponse GetDocument([FromBody] GetDocumentQuery query)

@@ -19,7 +19,7 @@ namespace DocStore.Server
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,6 +34,7 @@ namespace DocStore.Server
             services.AddControllersWithViews();
             services.AddSingleton<AppSettingsLoader>();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IDocumentsRepository), typeof(DocumentsRepository));
             services.AddScoped(typeof(IDocumentsService), typeof(DocumentsService));
         }
 
