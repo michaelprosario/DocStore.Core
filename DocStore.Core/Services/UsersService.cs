@@ -55,6 +55,8 @@ namespace DocStore.Core.Services
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
             user.Id = Guid.NewGuid().ToString();
+            user.CreatedAt = DateTime.Now;
+            user.CreatedBy = "system";
 
             _users.Add(user);
 
