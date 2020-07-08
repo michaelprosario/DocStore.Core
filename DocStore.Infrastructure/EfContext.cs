@@ -11,5 +11,6 @@ namespace DocStore.Infrastructure
         }
 
         public DbSet<Doc> Documents { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

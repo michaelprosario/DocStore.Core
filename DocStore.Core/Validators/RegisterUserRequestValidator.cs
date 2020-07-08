@@ -9,7 +9,7 @@ namespace DocStore.Core.Validators
         {
             RuleFor(r => r.FirstName).NotEmpty();
             RuleFor(r => r.LastName).NotEmpty();
-            RuleFor(r => r.UserName).NotEmpty();
+            RuleFor(r => r.UserName).NotEmpty().EmailAddress();
             RuleFor(r => r.Password).NotEmpty();
         }
     }

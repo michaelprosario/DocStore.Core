@@ -79,6 +79,8 @@ namespace DocStore.Server
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IDocumentsRepository), typeof(DocumentsRepository));
             services.AddScoped(typeof(IDocumentsService), typeof(DocumentsService));
+            services.AddScoped(typeof(IUserDataServices), typeof(UserDataServices));
+            services.AddScoped(typeof(IUserService), typeof(UsersService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +101,13 @@ namespace DocStore.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

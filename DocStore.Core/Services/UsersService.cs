@@ -13,9 +13,9 @@ using FluentValidation.Results;
 
 namespace DocStore.Core.Services
 {
-    public class UserService : IUserService
+    public class UsersService : IUserService
     {
-        public UserService(IUserDataServices users)
+        public UsersService(IUserDataServices users)
         {
             Require.ObjectNotNull(users, "User data services need to be defined");
 
@@ -92,7 +92,8 @@ namespace DocStore.Core.Services
 
             try
             {
-                Create(user, password);
+                var userReturned = Create(user, password);
+                response.RecordId = userReturned.Id;
             }
             catch (Exception ex)
             {
