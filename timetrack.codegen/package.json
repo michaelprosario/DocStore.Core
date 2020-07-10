@@ -1,0 +1,9 @@
+{
+  "name": "timertracker.codegen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "swagger-axios-codegen": "^0.11.5"
+  }
+}

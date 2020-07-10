@@ -1,22 +1,26 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace DocStore.Core.Entities
 {
+    [DataContract]
     public class Doc : BaseEntity
     {
-        public string CollectionName { get; set; } = "";
-        public DateTime CreatedAt { get; set; }
-        public string CreatedBy { get; set; } = "";
-        public DateTime? DeletedAt { get; set; }
-        public string DeletedBy { get; set; } = "";
+        [DataMember] public string CollectionName { get; set; } = "";
+        [DataMember] public DateTime CreatedAt { get; set; }
+        [DataMember] public string CreatedBy { get; set; } = "";
+        [DataMember] public DateTime? DeletedAt { get; set; }
+        [DataMember] public string DeletedBy { get; set; } = "";
 
-        [Key] public string Id { get; set; } = "";
+        [Key]
+        [DataMember]  
+        public string Id { get; set; } = "";
 
-        public bool IsDeleted { get; set; } = false;
-        public string JsonData { get; set; } = "";
-        public string Name { get; set; } = "";
-        public DateTime? UpdatedAt { get; set; }
-        public string UpdatedBy { get; set; } = "";
+        [DataMember] public bool IsDeleted { get; set; } = false;
+        [DataMember] public string JsonData { get; set; } = "";
+        [DataMember] public string Name { get; set; } = "";
+        [DataMember] public DateTime? UpdatedAt { get; set; }
+        [DataMember] public string UpdatedBy { get; set; } = "";
     }
 }

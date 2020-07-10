@@ -1,7 +1,11 @@
-﻿namespace DocStore.Core.Requests
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+
+namespace DocStore.Core.Requests
 {
+    [DataContract]
     public class GetDocumentQuery : Request
     {
-        public string Id { get; set; } = "";
+        [DataMember] public string Id { get; set; } = "";
     }
 }

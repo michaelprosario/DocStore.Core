@@ -2,6 +2,7 @@
 
 namespace DocStore.Core.Requests
 {
+    [DataContract]
     public class RegisterUserCommand
     {
         [DataMember] public string FirstName { get; set; }

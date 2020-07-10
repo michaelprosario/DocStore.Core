@@ -1,7 +1,12 @@
-﻿namespace DocStore.Core.Requests
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+
+namespace DocStore.Core.Requests
 {
+    [DataContract]
     public class Request
     {
-        public string UserId { get; set; }
+        [DataMember]public string UserId { get; set; }
     }
 }
