@@ -81,6 +81,8 @@ namespace DocStore.Server
             services.AddScoped(typeof(IDocumentsService), typeof(DocumentsService));
             services.AddScoped(typeof(IUserDataServices), typeof(UserDataServices));
             services.AddScoped(typeof(IUserService), typeof(UsersService));
+
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +119,9 @@ namespace DocStore.Server
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
         }
     }
 }
