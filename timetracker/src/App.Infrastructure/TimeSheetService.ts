@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { ITimeSheetService } from "../app.core/interfaces/time.sheet.service";
-import { Project } from "../app.core/entities/project";
-import { RequireThat } from "../app.core/helpers/require.that";
-import { NewRecordResponse } from "../app.core/responses/new.record.response";
+import axios from './node_modules/axios';
+import { ITimeSheetService } from "../App.Core/Interfaces/TimeSheetService";
+import { Project } from "../App.Core/Entities/Project";
+import { RequireThat } from "../App.Core/Helpers/RequireThat";
+import { NewRecordResponse } from "../App.Core/Responses/NewRecordResponse";
 
 export class TimeSheetService implements ITimeSheetService{
     async addProject(record: Project): Promise<string> {

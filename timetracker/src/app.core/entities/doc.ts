@@ -1,5 +1,4 @@
-
-import { BaseEntity } from './base.entity'
+import { BaseEntity } from "./BaseEntity";
 
 export class Doc extends BaseEntity {
     CollectionName: string = "";

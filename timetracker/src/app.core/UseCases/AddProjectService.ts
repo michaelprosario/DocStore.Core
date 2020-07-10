@@ -1,8 +1,8 @@
-import { ITimeSheetService } from '../interfaces/time.sheet.service';
-import { NewRecordResponse } from '../responses/new.record.response';
-import { Project } from '../entities/project';
-import { RequireThat } from '../helpers/require.that';
-import HTTPStatusCode from '../enums/http.status.codes';
+import { ITimeSheetService } from '../Interfaces/TimeSheetService';
+import { NewRecordResponse } from '../Responses/NewRecordResponse';
+import { Project } from '../Entities/Project';
+import { RequireThat } from '../Helpers/RequireThat';
+import HTTPStatusCode from '../Enums/HttpStatusCode';
 
 export class AddProjectCommand {
     public Project: Project = new Project();
