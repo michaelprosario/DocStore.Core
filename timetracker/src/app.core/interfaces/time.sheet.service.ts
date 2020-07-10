@@ -3,5 +3,5 @@ import { NewRecordResponse } from "../responses/new.record.response";
 import { Project } from "../entities/project";
 
 export interface ITimeSheetService{
-    addProject(record: Project): string;
+    addProject(record: Project): Promise<string>;
 }
