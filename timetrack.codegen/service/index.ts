@@ -3,6 +3,8 @@
 /* eslint-disable */
 import axiosStatic, { AxiosInstance } from 'axios';
 
+import { Expose, Transform, Type, plainToClass } from 'class-transformer';
+
 export interface IRequestOptions {
   headers?: any;
   baseURL?: string;
@@ -81,7 +83,7 @@ export class DocumentsService {
   /**
    *
    */
-  static documentsAddDocument(
+  documentsAddDocument(
     params: {
       /**  */
       command: AddDocumentCommand;
@@ -96,13 +98,17 @@ export class DocumentsService {
       let data = params['command'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(
+        configs,
+        (response: any) => resolve(plainToClass(NewRecordResponse, response, { strategy: 'excludeAll' })),
+        reject
+      );
     });
   }
   /**
    *
    */
-  static documentsEditDocument(
+  documentsEditDocument(
     params: {
       /**  */
       command: UpdateDocumentCommand;
@@ -117,13 +123,13 @@ export class DocumentsService {
       let data = params['command'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(configs, (response: any) => resolve(plainToClass(Response, response, { strategy: 'excludeAll' })), reject);
     });
   }
   /**
    *
    */
-  static documentsDeleteDocument(
+  documentsDeleteDocument(
     params: {
       /**  */
       command: DeleteDocumentCommand;
@@ -138,13 +144,13 @@ export class DocumentsService {
       let data = params['command'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(configs, (response: any) => resolve(plainToClass(Response, response, { strategy: 'excludeAll' })), reject);
     });
   }
   /**
    *
    */
-  static documentsGetDocumentsByCollection(
+  documentsGetDocumentsByCollection(
     params: {
       /**  */
       query: GetDocumentsByCollection;
@@ -159,13 +165,17 @@ export class DocumentsService {
       let data = params['query'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(
+        configs,
+        (response: any) => resolve(plainToClass(GetDocumentsResponse, response, { strategy: 'excludeAll' })),
+        reject
+      );
     });
   }
   /**
    *
    */
-  static documentsGetDocument(
+  documentsGetDocument(
     params: {
       /**  */
       query: GetDocumentQuery;
@@ -180,7 +190,11 @@ export class DocumentsService {
       let data = params['query'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(
+        configs,
+        (response: any) => resolve(plainToClass(GetDocumentResponse, response, { strategy: 'excludeAll' })),
+        reject
+      );
     });
   }
 }
@@ -189,7 +203,7 @@ export class UsersService {
   /**
    *
    */
-  static usersAuthenticate(
+  usersAuthenticate(
     params: {
       /**  */
       userDto: UserDto;
@@ -210,7 +224,7 @@ export class UsersService {
   /**
    *
    */
-  static usersRegisterUser(
+  usersRegisterUser(
     params: {
       /**  */
       command: RegisterUserCommand;
@@ -225,108 +239,200 @@ export class UsersService {
       let data = params['command'];
 
       configs.data = data;
-      axios(configs, resolve, reject);
+      axios(
+        configs,
+        (response: any) => resolve(plainToClass(NewRecordResponse, response, { strategy: 'excludeAll' })),
+        reject
+      );
     });
   }
 }
 
-export interface NewRecordResponse {}
-
-export interface Response {
-  /**  */
-  code: ResponseCode;
-
-  /**  */
-  message: string;
-
-  /**  */
-  validationErrors: ValidationFailure[];
+export class NewRecordResponse {
+  constructor(data: undefined | any = {}) {}
 }
 
-export interface ValidationFailure {
+export class Response {
   /**  */
-  propertyName: string;
+  @Expose()
+  @Type(() => ResponseCode)
+  'code': ResponseCode;
 
   /**  */
-  errorMessage: string;
+  @Expose()
+  'message': string;
 
   /**  */
-  attemptedValue: any | null;
+  @Expose()
+  @Type(() => ValidationFailure)
+  'validationErrors': ValidationFailure[];
 
-  /**  */
-  customState: any | null;
-
-  /**  */
-  severity: Severity;
-
-  /**  */
-  errorCode: string;
-
-  /**  */
-  formattedMessageArguments: any | null[];
-
-  /**  */
-  formattedMessagePlaceholderValues: object;
-
-  /**  */
-  resourceName: string;
+  constructor(data: undefined | any = {}) {
+    this['code'] = data['code'];
+    this['message'] = data['message'];
+    this['validationErrors'] = data['validationErrors'];
+  }
 }
 
-export interface AddDocumentCommand {}
-
-export interface Doc {}
-
-export interface BaseEntity {
+export class ValidationFailure {
   /**  */
-  id: string;
+  @Expose()
+  'propertyName': string;
+
+  /**  */
+  @Expose()
+  'errorMessage': string;
+
+  /**  */
+  @Expose()
+  @Type(() => any | null)
+  'attemptedValue': any | null;
+
+  /**  */
+  @Expose()
+  @Type(() => any | null)
+  'customState': any | null;
+
+  /**  */
+  @Expose()
+  @Type(() => Severity)
+  'severity': Severity;
+
+  /**  */
+  @Expose()
+  'errorCode': string;
+
+  /**  */
+  @Expose()
+  @Type(() => any | null)
+  'formattedMessageArguments': any | null[];
+
+  /**  */
+  @Expose()
+  'formattedMessagePlaceholderValues': object;
+
+  /**  */
+  @Expose()
+  'resourceName': string;
+
+  constructor(data: undefined | any = {}) {
+    this['propertyName'] = data['propertyName'];
+    this['errorMessage'] = data['errorMessage'];
+    this['attemptedValue'] = data['attemptedValue'];
+    this['customState'] = data['customState'];
+    this['severity'] = data['severity'];
+    this['errorCode'] = data['errorCode'];
+    this['formattedMessageArguments'] = data['formattedMessageArguments'];
+    this['formattedMessagePlaceholderValues'] = data['formattedMessagePlaceholderValues'];
+    this['resourceName'] = data['resourceName'];
+  }
 }
 
-export interface Request {
-  /**  */
-  userId: string;
+export class AddDocumentCommand {
+  constructor(data: undefined | any = {}) {}
 }
 
-export interface UpdateDocumentCommand {}
-
-export interface DeleteDocumentCommand {}
-
-export interface GetDocumentsResponse {}
-
-export interface GetDocumentsByCollection {}
-
-export interface GetDocumentResponse {}
-
-export interface GetDocumentQuery {}
-
-export interface UserDto {
-  /**  */
-  id: string;
-
-  /**  */
-  firstName: string;
-
-  /**  */
-  lastName: string;
-
-  /**  */
-  username: string;
-
-  /**  */
-  password: string;
+export class Doc {
+  constructor(data: undefined | any = {}) {}
 }
 
-export interface RegisterUserCommand {
+export class BaseEntity {
   /**  */
-  firstName: string;
+  @Expose()
+  'id': string;
+
+  constructor(data: undefined | any = {}) {
+    this['id'] = data['id'];
+  }
+}
+
+export class Request {
+  /**  */
+  @Expose()
+  'userId': string;
+
+  constructor(data: undefined | any = {}) {
+    this['userId'] = data['userId'];
+  }
+}
+
+export class UpdateDocumentCommand {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class DeleteDocumentCommand {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class GetDocumentsResponse {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class GetDocumentsByCollection {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class GetDocumentResponse {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class GetDocumentQuery {
+  constructor(data: undefined | any = {}) {}
+}
+
+export class UserDto {
+  /**  */
+  @Expose()
+  'id': string;
 
   /**  */
-  lastName: string;
+  @Expose()
+  'firstName': string;
 
   /**  */
-  userName: string;
+  @Expose()
+  'lastName': string;
 
   /**  */
-  password: string;
+  @Expose()
+  'username': string;
+
+  /**  */
+  @Expose()
+  'password': string;
+
+  constructor(data: undefined | any = {}) {
+    this['id'] = data['id'];
+    this['firstName'] = data['firstName'];
+    this['lastName'] = data['lastName'];
+    this['username'] = data['username'];
+    this['password'] = data['password'];
+  }
+}
+
+export class RegisterUserCommand {
+  /**  */
+  @Expose()
+  'firstName': string;
+
+  /**  */
+  @Expose()
+  'lastName': string;
+
+  /**  */
+  @Expose()
+  'userName': string;
+
+  /**  */
+  @Expose()
+  'password': string;
+
+  constructor(data: undefined | any = {}) {
+    this['firstName'] = data['firstName'];
+    this['lastName'] = data['lastName'];
+    this['userName'] = data['userName'];
+    this['password'] = data['password'];
+  }
 }
 
 export type ResponseCode = 200 | 400 | 404 | 405;
