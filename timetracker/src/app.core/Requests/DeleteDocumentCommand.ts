@@ -1,4 +1,6 @@
-﻿export interface DeleteDocumentCommand extends Request
+﻿import { Request } from "./Request";
+
+export class DeleteDocumentCommand extends Request
 {
-    Id: string;
+    Id: string = "";
 }

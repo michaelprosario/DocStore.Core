@@ -1,5 +1,6 @@
 ﻿import { Doc } from "../Entities/Doc";
+import { Request } from "./Request";
 
-export interface AddDocumentCommand extends Request {
-    Document: Doc;
+export class AddDocumentCommand extends Request {
+    Document: Doc = new Doc();
 }

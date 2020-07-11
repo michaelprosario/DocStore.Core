@@ -1,4 +1,6 @@
-﻿export interface GetDocumentsByCollection extends Request
+﻿import { Request } from "./Request";
+
+export class GetDocumentsByCollection extends Request
 {
-    Collection: string;
+    Collection: string = "";
 }

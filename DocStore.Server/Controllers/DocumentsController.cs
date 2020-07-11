@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DocStore.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class DocumentsController : Controller
     {

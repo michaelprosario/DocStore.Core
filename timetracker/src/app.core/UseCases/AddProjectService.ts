@@ -1,4 +1,4 @@
-import { ITimeSheetService } from '../Interfaces/TimeSheetService';
+import { ITimeSheetService } from '../Interfaces/ITimeSheetService';
 import { NewRecordResponse } from '../Responses/NewRecordResponse';
 import { Project } from '../Entities/Project';
 import { RequireThat } from '../Helpers/RequireThat';

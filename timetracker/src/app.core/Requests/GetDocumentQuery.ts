@@ -1,4 +1,6 @@
-﻿export interface GetDocumentQuery extends Request
+﻿import { Request } from "./Request";
+
+export class GetDocumentQuery extends Request
 {
-    Id: string;
+    Id: string = "";
 }

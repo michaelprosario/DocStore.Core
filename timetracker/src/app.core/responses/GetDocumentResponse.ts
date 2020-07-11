@@ -1,6 +1,6 @@
 ﻿import { Doc } from "../Entities/Doc";
 
-export interface GetDocumentResponse extends Response
+export class GetDocumentResponse extends Response
 {
-    Document: Doc;
+    public Document: Doc = new Doc();
 }

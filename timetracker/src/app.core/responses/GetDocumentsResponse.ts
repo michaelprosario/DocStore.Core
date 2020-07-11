@@ -1,6 +1,6 @@
 ﻿import { Doc } from "../Entities/Doc";
 
-export interface GetDocumentsResponse extends Response
+export class GetDocumentsResponse extends Response
 {
-    Documents: Doc[];
+    public Documents: Doc[] = new Array<Doc>();
 }

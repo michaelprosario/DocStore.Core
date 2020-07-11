@@ -1,4 +1,4 @@
-﻿export interface Request
+﻿export class Request
 {
-    UserId: string;
+    UserId: string = "";
 }
