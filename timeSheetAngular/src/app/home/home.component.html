@@ -1,0 +1,39 @@
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold py-4">Admin Home</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+
+      <table class="table table-responsive-md table-striped">
+
+        <tr>
+          <td class="pt-3-half">
+            <a [routerLink]="['/listPosts']">
+              Manage posts
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="pt-3-half">
+            <a [routerLink]="['/listSpeakers']">
+              Manage speakers
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="pt-3-half">
+            <a [routerLink]="['/listSponsors']">
+              Manage sponsors
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="pt-3-half">
+            <a [routerLink]="['/listSessions']">
+              Manage sessions
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

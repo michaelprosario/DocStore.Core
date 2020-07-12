@@ -1,0 +1,30 @@
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold py-4">Blog posts</h3>
+  <div class="card-body">
+    <div id="table" class="table-editable">
+
+      <button type="button" title="New blog post" class="btn btn-info btn-rounded btn-sm my-0" (click)="onNewPost()">New
+        Post
+      </button>&nbsp;
+      <button type="button" title="Home" class="btn btn-info btn-rounded btn-sm my-0" (click)="goHome()">Home</button>
+
+      <br><br>
+      <table class="table table-responsive-md table-striped">
+        <tr>
+          <th>Title</th>
+          <th>Action</th>
+        </tr>
+        <tbody *ngFor="let post of posts">
+          <tr>
+            <td class="pt-3-half">{{post.jsonData.title}}</td>
+            <td>
+              <span class="">
+                <button type="button" title="Edit blog post" class="btn btn-info btn-rounded btn-sm my-0" (click)="openPost(post.id)">Edit</button>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
