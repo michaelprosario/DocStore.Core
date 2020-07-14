@@ -1,0 +1,1 @@
+{"version":3,"file":"code-gen.js","sourceRoot":"","sources":["../code-gen.ts"],"names":[],"mappings":";;;;;AAAA,4DAAoC;AAEpC,MAAa,OAAO;IAEX,QAAQ,CAAC,MAAM,EAAE,cAAsB;QAC5C,MAAM,QAAQ,GAAG,oBAAU,CAAC,OAAO,CAAC,cAAc,CAAC,CAAC;QACpD,IAAI,MAAM,GAAG,QAAQ,CAAC,MAAM,CAAC,CAAC;QAC9B,OAAO,MAAM,CAAC;IAChB,CAAC;CACF;AAPD,0BAOC"}

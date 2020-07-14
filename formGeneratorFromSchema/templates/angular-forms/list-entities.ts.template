@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DocumentsService } from '../core/services/document.service';
+import { GetDocumentsByCollectionQuery } from '../core/queries/get.documents.by.collection.query';
+import { IGenericResponse } from '../core/responses/generic.response';
+
+@Component({
+  selector: 'app-list-{{typeParamCase}}',
+  templateUrl: './list-{{typeParamCase}}.component.html'
+})
+export class List{{typePascalCase}}Component implements OnInit {
+  records: any[];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private docsService: DocumentsService
+  ) { }
+
+  ngOnInit() {
+    const query = new GetDocumentsByCollectionQuery();
+    query.collectionName = '{{typePascalCase}}';
+
+    this.docsService.getAll(query).then(serverResponse => {
+      const response = serverResponse as unknown as IGenericResponse;
+      this.records = response.data;
+    }).catch(error => {
+      console.log('Error on list document operation');
+      console.log(error);
+    })
+  }
+
+  onNewRecord() {
+    this.router.navigate(['/new{{typePascalCase}}']);
+  }
+
+  openRecord(recordId: string) {
+    this.router.navigate(['/edit{{typePascalCase}}/' + recordId]);
+  }
+}

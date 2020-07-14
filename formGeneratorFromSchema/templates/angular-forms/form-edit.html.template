@@ -1,0 +1,23 @@
+<div class="card" *ngIf="record">
+  <h3 class="card-header text-center font-weight-bold py-4">{{typePascalCase}} edit</h3>
+  <div class="card-body">
+    <div class="container">
+      <app-tool-bar (closeRecord)="onClose()" (deleteRecord)="onDelete()" (newRecord)="onNew()" (newRecord)="onNew()"
+        (saveAndCloseRecord)="onPostSave(true)" (saveRecord)="onPostSave(false)"></app-tool-bar>
+      <app-info-bar></app-info-bar>
+
+      <fieldset>
+        {{#each properties}}
+        <div class="control-group">
+          <label class="control-label" for="{{this.propName}}">{{this.propNameSentenceCase}}</label>
+          <div class="controls">
+            <input type="text" id="{{this.propName}}" name="{{this.propName}}"
+              placeholder="Enter {{this.propNameSentenceCase}}" [(ngModel)]="record.{{this.propName}}" />
+          </div>
+        </div>
+        {{/each}}
+      </fieldset>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://innovativeteams.net/session.schema.json",
+    "title": "Session",
+    "description": "A session from a conference",
+    "type": "object",
+    "typeName": "session",
+    "properties": {
+      "id": {
+        "description": "id for session",
+        "type": "string"
+      },
+      "track": {
+        "description": "track for session",
+        "type": "string"
+      },
+      "title": {
+        "description": "title for session",
+        "type": "string"
+      },
+      "description": {
+        "description": "description for session",
+        "type": "string"
+      },
+      "speakerIdList": {
+        "description": "list of speaker identifiers for session",
+        "type": "string"
+      },
+      "date": {
+        "description": "date for session",
+        "type": "string"
+      },
+      "startTime": {
+        "description": "startTime for session",
+        "type": "string"
+      },
+      "endTime": {
+        "description": "endTime for session",
+        "type": "string"
+      },
+      "lengthInMinutes": {
+        "description": "session length in minutes",
+        "type": "integer"
+      },
+      "keyNoteFlag": {
+        "description": "Keynote flag",
+        "type": "boolean"
+      },
+      "complexity": {
+        "description": "complexity for session",
+        "type": "string"
+      },
+      "sessionUrl": {
+        "description": "sessionUrl for session",
+        "type": "string"
+      },
+      "locationInfo": {
+        "description": "locationInfo for session",
+        "type": "string"
+      },
+      "tags": {
+        "description": "tags for session",
+        "type": "string"
+      },
+      "notes": {
+        "description": "notes for session",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "track",
+      "title",
+      "description",
+      "date",
+      "startTime",
+      "endTime",
+      "lengthInMinutes",
+      "complexity"
+    ]
+  }

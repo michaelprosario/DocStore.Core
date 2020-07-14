@@ -1,0 +1,21 @@
+{
+  "name": "form-generator-from-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@types/node": "^14.0.23",
+    "change-case": "^4.1.1",
+    "handlebars": "^4.7.6"
+  }
+}

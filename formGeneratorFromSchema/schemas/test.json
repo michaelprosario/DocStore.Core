@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "sponsor",
+  "typePascalCase": "Sponsor",
+  "title": "The sponsor Schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "required": [
+      "small-logo",
+      "large-logo",
+      "sponsor-name",
+      "sponsor-level",
+      "sponsor-link"
+  ],
+  "properties": {
+      "smallLogo": {
+          "$id": "#/properties/small-logo",
+          "type": "string",
+          "title": "The Small-logo Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "small logo"
+          ]
+      },
+      "largeLogo": {
+          "$id": "#/properties/large-logo",
+          "type": "string",
+          "title": "The Large-logo Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "large logo"
+          ]
+      },
+      "sponsorName": {
+          "$id": "#/properties/sponsor-name",
+          "type": "string",
+          "title": "The Sponsor-name Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "teksystems"
+          ]
+      },
+      "sponsorLevel": {
+          "$id": "#/properties/sponsor-level",
+          "type": "string",
+          "title": "The Sponsor-level Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "Gold"
+          ]
+      },
+      "sponsorLink": {
+          "$id": "#/properties/sponsor-link",
+          "type": "string",
+          "title": "The Sponsor-link Schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "teksystems.com"
+          ]
+      }
+  }
+}

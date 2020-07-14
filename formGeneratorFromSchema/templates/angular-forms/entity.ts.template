@@ -1,0 +1,22 @@
+import { AbstractValidator } from "fluent-ts-validator";
+
+export class {{ typePascalCase }} {
+  public id: string = "";
+  {{#each properties}}
+  public {{ this.propName }}: {{ this.type }};
+  {{/each}}
+}
+
+export class {{ type }}Validator extends AbstractValidator<{{ typePascalCase }}> {
+    constructor() {
+        super();
+
+        {{#each properties}}
+        {{#if_eq this.type 'string'}}
+        this.validateIfString((doc) => doc.{{ this.propName }})
+            .isNotEmpty()
+            .withFailureMessage("{{ this.propNamePascalCase }} is required");
+        {{/if_eq}}
+        {{/each}} 
+    }
+}

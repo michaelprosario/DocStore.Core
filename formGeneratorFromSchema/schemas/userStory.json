@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "UserStory",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+      {
+          "complexity": 5.0,
+          "details": "As a user, we should do cool stuff...",
+          "story": "story name",
+          "owner": "michael rosario",
+          "priority": 3.0,
+          "tests": "tests go here"
+      }
+  ],
+  "required": [
+      "story",
+      "complexity",
+      "priority",
+      "tests",
+      "owner",
+      "details"
+  ],
+  "additionalProperties": true,
+  "properties": {
+      "story": {
+          "$id": "#/properties/story",
+          "type": "string",
+          "title": "The story schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "story name"
+          ]
+      },
+      "complexity": {
+          "$id": "#/properties/complexity",
+          "type": "number",
+          "title": "The complexity schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0.0,
+          "examples": [
+              5.0
+          ]
+      },
+      "priority": {
+          "$id": "#/properties/priority",
+          "type": "number",
+          "title": "The priority schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": 0.0,
+          "examples": [
+              3.0
+          ]
+      },
+      "tests": {
+          "$id": "#/properties/tests",
+          "type": "string",
+          "title": "The tests schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "tests go here"
+          ]
+      },
+      "owner": {
+          "$id": "#/properties/owner",
+          "type": "string",
+          "title": "The owner schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "michael rosario"
+          ]
+      },
+      "details": {
+          "$id": "#/properties/details",
+          "type": "string",
+          "title": "The details schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+              "As a user, we should do cool stuff..."
+          ]
+      }
+  }
+}
