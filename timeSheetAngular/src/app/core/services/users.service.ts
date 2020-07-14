@@ -28,7 +28,8 @@ export class UsersService {
                 if (response.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     const userToken = new UserJwtToken(username, response.token);
-                    localStorage.setItem('currentUser', JSON.stringify(userToken));
+                    localStorage.setItem('token', JSON.stringify(userToken));
+                    localStorage.setItem('currentUser', JSON.stringify(response));
                     return new LoginResponse(true, "ok");
                 } else {
                     return new LoginResponse(false, "Enter valid user name and password");
@@ -44,5 +45,6 @@ export class UsersService {
 
     logout() {
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
     }
 }

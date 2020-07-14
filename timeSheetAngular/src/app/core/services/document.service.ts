@@ -34,7 +34,7 @@ export class DocumentsService {
             throw new Error('query is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/list/` + query.collectionName, query).toPromise();
+        return this.http.post(`${environment.apiUrl}/GetDocumentsByCollection/`, query).toPromise();
     }
 
     public async get(query: GetDocumentQuery) {
