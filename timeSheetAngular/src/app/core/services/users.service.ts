@@ -16,11 +16,12 @@ export class UsersService {
             throw new Error("Command is not defined");
         }
 
-        return this.http.post(`${environment.apiUrl}/signup`, command).toPromise();
+        return this.http.post(`${environment.apiUrl}/Users/RegisterUser`, command).toPromise();
     }
 
     async login(username: string, password: string) {
-        let loginResponse = await this.http.post<any>(`${environment.apiUrl}/signin`, { email: username, password: password }).toPromise()
+        
+        let loginResponse = await this.http.post<any>(`${environment.apiUrl}/Users/Authenticate`, { username: username, password: password }).toPromise()
             .then(response => {
                 // login successful if there's a jwt token in the response
                 if (response.success && response.token) {

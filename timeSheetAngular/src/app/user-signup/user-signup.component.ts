@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddUserCommand } from '../core/commands/add.user.command';
-import { UserValidator } from '../core/validators/user.validator';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UsersService } from '../core/services/users.service';
+import { AddUserCommandValidator } from '../core/validators/AddUserCommandValidator';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UsersService } from '../core/services/users.service';
 
 @Component({
   selector: 'app-user-signup',
@@ -29,8 +29,8 @@ export class UserSignupComponent implements OnInit {
   }
 
   formValid(): boolean {
-    const validator = new UserValidator(this.confirmPassword);
-    const result = validator.validate(this.command.userToAdd);
+    const validator = new AddUserCommandValidator(this.confirmPassword);
+    const result = validator.validate(this.command);
     this.errors = [];
 
     if (!result.isValid()) {
