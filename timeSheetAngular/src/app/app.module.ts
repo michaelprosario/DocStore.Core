@@ -8,8 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InfoBarComponent } from './info-bar/info-bar.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { ListPostsComponent } from './list-posts/list-posts.component';
-import { ListSpeakersComponent } from './list-speakers/list-speakers.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { LoginComponent } from './login/login.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -18,15 +16,13 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { UsersService } from './core/services/users.service';
-import { EditSpeakerComponent } from './edit-speaker/edit-speaker.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditSpeakerComponent,
     HomeComponent,
     InfoBarComponent,
-    ListSpeakersComponent,
     LoginComponent,
     SiteHeaderComponent,
     ToolBarComponent,
