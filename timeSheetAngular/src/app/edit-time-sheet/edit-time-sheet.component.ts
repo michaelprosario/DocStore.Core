@@ -7,9 +7,8 @@ import { DocumentsService } from '../core/services/document.service';
 import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
-
+import { TimeSheet, TimeSheetValidator } from './edit-time-sheet';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
-import { TimeSheetValidator } from '../core/validators/TimeSheetValidator';
 
 @Component({
   selector: 'app-edit-time-sheet',
@@ -48,7 +47,7 @@ export class EditTimeSheetComponent implements OnInit {
     debugger;
     let userJson = localStorage.getItem("currentUser");
     let currentUser = JSON.parse(userJson);
-    let currentUserId = currentUser.Id;
+    let currentUserId = currentUser.id;
     this.record.ownerId = currentUserId;
   }
 
@@ -57,7 +56,7 @@ export class EditTimeSheetComponent implements OnInit {
     if (url.startsWith('/newTimeSheet')) {
       this.setCurrentOwnerId();
       this.editingNewRecord = true;
-      setTimeout(x => this.infoBar.displayInfo("Add new " + this.recordName), 1000);
+      setTimeout(x => this.infoBar.displayInfo("Add new time sheet"), 1000);
       this.viewModelReady = true;
     } else if (url.startsWith('/editTimeSheet')) {
       this.recordId = this.route.snapshot.paramMap.get('id');
