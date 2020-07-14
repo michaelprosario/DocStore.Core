@@ -20,11 +20,12 @@ export class UsersService {
     }
 
     async login(username: string, password: string) {
-        
+
         let loginResponse = await this.http.post<any>(`${environment.apiUrl}/Users/Authenticate`, { username: username, password: password }).toPromise()
             .then(response => {
+
                 // login successful if there's a jwt token in the response
-                if (response.success && response.token) {
+                if (response.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     const userToken = new UserJwtToken(username, response.token);
                     localStorage.setItem('currentUser', JSON.stringify(userToken));
