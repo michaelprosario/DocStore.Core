@@ -7,23 +7,23 @@ import { DocumentsService } from '../core/services/document.service';
 import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
-import { TimeSheet, TimeSheetValidator } from './edit-time-sheet';
+import { TimeEntry, TimeEntryValidator } from './edit-time-entry';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
 
 @Component({
-  selector: 'app-edit-time-sheet',
-  templateUrl: './edit-time-sheet.component.html'
+  selector: 'app-edit-time-entry',
+  templateUrl: './edit-time-entry.component.html'
 })
-export class EditTimeSheetComponent implements OnInit {
+export class EditTimeEntryComponent implements OnInit {
 
   @ViewChild(InfoBarComponent, { static: false }) infoBar: InfoBarComponent;
 
   currentDocument: Doc;
   editingNewRecord: boolean;
   errors: string[];
-  record: TimeSheet;
+  record: TimeEntry;
   recordId: string;
-  recordName: string = "Time sheet";
+  recordName: string = "TimeEntry";
   statusText: string;
   viewModelReady: boolean;
 
@@ -34,7 +34,7 @@ export class EditTimeSheetComponent implements OnInit {
   ) {
     this.editingNewRecord = true;
     this.errors = [];
-    this.record = new TimeSheet();
+    this.record = new TimeEntry();
     this.recordId = "";
     this.statusText = "";
     this.viewModelReady = false;
@@ -53,12 +53,12 @@ export class EditTimeSheetComponent implements OnInit {
 
   setupForm() {
     const url = this.router.url;
-    if (url.startsWith('/newTimeSheet')) {
+    if (url.startsWith('/newTimeEntry')) {
       this.setCurrentOwnerId();
       this.editingNewRecord = true;
-      setTimeout(x => this.infoBar.displayInfo("Add new time sheet"), 1000);
+      setTimeout(x => this.infoBar.displayInfo("Add new TimeEntry"), 1000);
       this.viewModelReady = true;
-    } else if (url.startsWith('/editTimeSheet')) {
+    } else if (url.startsWith('/editTimeEntry')) {
       this.recordId = this.route.snapshot.paramMap.get('id');
       this.loadRecord();
     }
@@ -71,6 +71,7 @@ export class EditTimeSheetComponent implements OnInit {
     this.documentsService.get(query)
       .then(data => {
         const response = data as unknown as IGenericResponse;
+        debugger;
         this.loadRecordFromResponse(response);
       })
       .catch(errors => {
@@ -111,6 +112,7 @@ export class EditTimeSheetComponent implements OnInit {
         doc.deletedAt = null;
         command.document = doc;
         this.documentsService.add(command).then(data => {
+          debugger;
           const response = data as unknown as IGenericResponse;
           currentContext.recordId = response.recordId;
           currentContext.loadRecord();
@@ -119,6 +121,7 @@ export class EditTimeSheetComponent implements OnInit {
           this.logError(currentContext, error);
         });
       } else {
+        debugger;
         const command = new UpdateDocumentCommand();
         command.document = doc;
         this.documentsService.update(command).then(data => {
@@ -131,7 +134,7 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['/listTimeSheets']);
+    this.router.navigate(['/listTimeEntrys']);
   }
 
   private getDocFromRecord() {
@@ -142,15 +145,16 @@ export class EditTimeSheetComponent implements OnInit {
       doc = this.currentDocument;
     }else{
       doc = new Doc();
+      doc.collectionName = "TimeEntry";
     }
-    
+
     doc.jsonData = JSON.stringify(this.record);
-    doc.name = this.record.weekEnding;
+    doc.name = this.record.projectCode + " / " + this.record.workItemId + " / " + this.record.entryDate;
     return doc;
   }
 
   formIsOkay() {
-    const results = new TimeSheetValidator().validate(this.record);
+    const results = new TimeEntryValidator().validate(this.record);
     this.errors = results.getFailureMessages();
     this.infoBar.displayErrors(this.errors);
     return this.errors.length === 0;
@@ -172,6 +176,6 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onNew() {
-    this.router.navigate(['/newTimeSheet']);
+    this.router.navigate(['/newTimeEntry']);
   }
 }

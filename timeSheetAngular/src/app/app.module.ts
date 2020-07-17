@@ -2,6 +2,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './guard/auth.guard';
 import { BrowserModule } from '@angular/platform-browser';
+import { EditTimeEntryComponent } from './edit-time-entry/edit-time-entry.component';
 import { EditTimeSheetComponent } from './edit-time-sheet/edit-time-sheet.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InfoBarComponent } from './info-bar/info-bar.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { ListTimeEntryComponent } from './list-time-entry/list-time-entry.component';
 import { ListTimeSheetComponent } from './list-time-sheet/list-time-sheet.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { LoginComponent } from './login/login.component';
@@ -23,9 +25,11 @@ import { UsersService } from './core/services/users.service';
   declarations: [
     AppComponent,
     EditTimeSheetComponent,
+    EditTimeEntryComponent,
     HomeComponent,
     InfoBarComponent,
     ListTimeSheetComponent,
+    ListTimeEntryComponent,
     LoginComponent,
     SiteHeaderComponent,
     ToolBarComponent,
