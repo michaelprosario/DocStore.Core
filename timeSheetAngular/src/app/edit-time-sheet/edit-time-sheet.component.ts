@@ -18,13 +18,14 @@ export class EditTimeSheetComponent implements OnInit {
 
   @ViewChild(InfoBarComponent, { static: false }) infoBar: InfoBarComponent;
 
+  currentDocument: Doc;
   editingNewRecord: boolean;
-  viewModelReady: boolean;
   errors: string[];
   record: TimeSheet;
   recordId: string;
-  recordName: string = "object";
+  recordName: string = "Time sheet";
   statusText: string;
+  viewModelReady: boolean;
 
   constructor(
     private documentsService: DocumentsService,
@@ -44,7 +45,6 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   private setCurrentOwnerId() {
-    debugger;
     let userJson = localStorage.getItem("currentUser");
     let currentUser = JSON.parse(userJson);
     let currentUserId = currentUser.id;
@@ -80,11 +80,11 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   private loadRecordFromResponse(response: IGenericResponse) {
-    this.recordId = response.recordId;
-    this.record = { ...response.data.jsonData }
-    console.log(JSON.stringify(this.record));
+    this.recordId = response.document.id;
+    this.currentDocument = response.document;
+    this.record = JSON.parse(response.document.jsonData);
     this.viewModelReady = true;
-    this.infoBar.displayTimeStamp(response.data.createdBy, response.data.createdAt)
+    this.infoBar.displayTimeStamp(response.document.createdBy, response.document.createdAt)
   }
 
   afterSaveActions(context, saveAndClose) {
@@ -106,6 +106,9 @@ export class EditTimeSheetComponent implements OnInit {
 
       if (this.editingNewRecord) {
         const command = new AddDocumentCommand();
+        doc.createdAt = null;
+        doc.updatedAt = null;
+        doc.deletedAt = null;
         command.document = doc;
         this.documentsService.add(command).then(data => {
           const response = data as unknown as IGenericResponse;
@@ -128,13 +131,11 @@ export class EditTimeSheetComponent implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['/listTimeSheet']);
+    this.router.navigate(['/listTimeSheets']);
   }
 
   private getDocFromRecord() {
-    const doc = new Doc();
-    doc.id = this.record.id;
-    doc.collectionName = 'TimeSheet';
+    const doc = this.currentDocument;
     doc.jsonData = JSON.stringify(this.record);
     doc.name = this.record.weekEnding;
     return doc;

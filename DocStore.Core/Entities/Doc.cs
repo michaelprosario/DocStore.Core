@@ -8,7 +8,7 @@ namespace DocStore.Core.Entities
     public class Doc : BaseEntity
     {
         [DataMember] public string CollectionName { get; set; } = "";
-        [DataMember] public DateTime CreatedAt { get; set; }
+        [DataMember] public DateTime? CreatedAt { get; set; }
         [DataMember] public string CreatedBy { get; set; } = "";
         [DataMember] public DateTime? DeletedAt { get; set; }
         [DataMember] public string DeletedBy { get; set; } = "";

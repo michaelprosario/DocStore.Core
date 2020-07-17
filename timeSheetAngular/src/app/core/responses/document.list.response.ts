@@ -1,7 +1,7 @@
-export interface IGenericResponse {
+export interface IDocumentListResponse {
     recordId: string;
     code: number;
     message: string;
     errors: string[];
-    document: any;
+    documents: any;
 }

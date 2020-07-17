@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentsService } from '../core/services/document.service';
 import { GetDocumentsByCollectionQuery } from '../core/queries/get.documents.by.collection.query';
-import { IGenericResponse } from '../core/responses/generic.response';
+import { IDocumentListResponse } from '../core/responses/document.list.response';
 
 @Component({
   selector: 'app-list-time-sheet',
@@ -22,8 +22,8 @@ export class ListTimeSheetComponent implements OnInit {
     query.collection = 'TimeSheet';
 
     this.docsService.getAll(query).then(serverResponse => {
-      const response = serverResponse as unknown as IGenericResponse;
-      this.records = response.data;
+      const response = serverResponse as unknown as IDocumentListResponse;
+      this.records = response.documents;
     }).catch(error => {
       console.log('Error on list document operation');
       console.log(error);
