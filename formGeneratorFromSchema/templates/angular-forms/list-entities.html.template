@@ -11,7 +11,7 @@
         </tr>
         <tbody *ngFor="let record of records">
           <tr>
-            <td class="pt-3-half">{{record.jsonData.name}}</td>
+            <td class="pt-3-half">{{record.name}}</td>
             <td>
               <span class="">
                 <button type="button" title="Edit record" class="btn btn-info btn-rounded btn-sm my-0"

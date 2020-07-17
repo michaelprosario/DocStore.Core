@@ -8,7 +8,6 @@ import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
 import { {{ typePascalCase }}, {{ typePascalCase }}Validator } from './edit-{{ typeParamCase }}';
-
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
 
 @Component({
@@ -19,13 +18,14 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
 
   @ViewChild(InfoBarComponent, { static: false }) infoBar: InfoBarComponent;
 
+  currentDocument: Doc;
   editingNewRecord: boolean;
-  viewModelReady: boolean;
   errors: string[];
   record: {{ typePascalCase }};
   recordId: string;
-  recordName: string = "{{ type }}";
+  recordName: string = "{{ typePascalCase }}";
   statusText: string;
+  viewModelReady: boolean;
 
   constructor(
     private documentsService: DocumentsService,
@@ -44,11 +44,19 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
     this.setupForm();
   }
 
+  private setCurrentOwnerId() {
+    let userJson = localStorage.getItem("currentUser");
+    let currentUser = JSON.parse(userJson);
+    let currentUserId = currentUser.id;
+    this.record.ownerId = currentUserId;
+  }
+
   setupForm() {
     const url = this.router.url;
     if (url.startsWith('/new{{ typePascalCase }}')) {
+      this.setCurrentOwnerId();
       this.editingNewRecord = true;
-      setTimeout(x => this.infoBar.displayInfo("Add new " + this.recordName), 1000);
+      setTimeout(x => this.infoBar.displayInfo("Add new {{ typePascalCase }}"), 1000);
       this.viewModelReady = true;
     } else if (url.startsWith('/edit{{ typePascalCase }}')) {
       this.recordId = this.route.snapshot.paramMap.get('id');
@@ -72,11 +80,11 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
   }
 
   private loadRecordFromResponse(response: IGenericResponse) {
-    this.recordId = response.recordId;
-    this.record = { ...response.data.jsonData }
-    console.log(JSON.stringify(this.record));
+    this.recordId = response.document.id;
+    this.currentDocument = response.document;
+    this.record = JSON.parse(response.document.jsonData);
     this.viewModelReady = true;
-    this.infoBar.displayTimeStamp(response.data.createdBy, response.data.createdAt)
+    this.infoBar.displayTimeStamp(response.document.createdBy, response.document.createdAt)
   }
 
   afterSaveActions(context, saveAndClose) {
@@ -98,6 +106,9 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
 
       if (this.editingNewRecord) {
         const command = new AddDocumentCommand();
+        doc.createdAt = null;
+        doc.updatedAt = null;
+        doc.deletedAt = null;
         command.document = doc;
         this.documentsService.add(command).then(data => {
           const response = data as unknown as IGenericResponse;
@@ -120,15 +131,13 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['/list{{ typePascalCase }}']);
+    this.router.navigate(['/list{{ typePascalCase }}s']);
   }
 
   private getDocFromRecord() {
-    const doc = new Doc();
-    doc.id = this.record.id;
-    doc.collectionName = '{{ typePascalCase }}';
+    const doc = this.currentDocument;
     doc.jsonData = JSON.stringify(this.record);
-    doc.name = this.record.name;
+    doc.name = this.record.weekEnding;
     return doc;
   }
 
@@ -141,9 +150,8 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
 
   onDelete() {
     if (confirm("Press OK to delete " + this.recordName)) {
-
       const command = new DeleteDocumentCommand();
-      command.id = this.record.id;
+      command.id = this.currentDocument.id;
 
       this.documentsService.delete(command)
         .then(data => {
