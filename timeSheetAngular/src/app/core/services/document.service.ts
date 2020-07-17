@@ -50,6 +50,6 @@ export class DocumentsService {
             throw new Error('command is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/DeleteDocument/` + command.id, command).toPromise();
+        return this.http.post(`${environment.apiUrl}/DeleteDocument`, command).toPromise();
     }
 }

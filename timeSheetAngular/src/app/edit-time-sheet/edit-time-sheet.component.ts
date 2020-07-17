@@ -150,9 +150,8 @@ export class EditTimeSheetComponent implements OnInit {
 
   onDelete() {
     if (confirm("Press OK to delete " + this.recordName)) {
-
       const command = new DeleteDocumentCommand();
-      command.id = this.record.id;
+      command.id = this.currentDocument.id;
 
       this.documentsService.delete(command)
         .then(data => {

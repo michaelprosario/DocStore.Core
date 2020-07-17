@@ -18,7 +18,7 @@ namespace DocStore.Infrastructure
         public IQueryable<Doc> GetDocumentsByCollection(string collection)
         {
             Require.NotNullOrEmpty(collection, "collection needs to be defined");
-            return _dbContext.Set<Doc>().Where(e => e.CollectionName.Equals(collection));
+            return _dbContext.Set<Doc>().Where(e => e.CollectionName.Equals(collection)  && e.IsDeleted == false);
         }
     }
 }
