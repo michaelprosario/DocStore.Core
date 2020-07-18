@@ -10,6 +10,7 @@ import { IDocumentListResponse } from '../core/responses/document.list.response'
 })
 export class ListTimeSheetComponent implements OnInit {
   records: any[];
+  timeSheetId: string = "";
 
   constructor(
     private router: Router,
@@ -36,5 +37,9 @@ export class ListTimeSheetComponent implements OnInit {
 
   openRecord(recordId: string) {
     this.router.navigate(['/editTimeSheet/' + recordId]);
+  }
+
+  openTimeEntries(recordId: string){
+    this.router.navigate(['/listTimeEntrys/' + recordId]);
   }
 }

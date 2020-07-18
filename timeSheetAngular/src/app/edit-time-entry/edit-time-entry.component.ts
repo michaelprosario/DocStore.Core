@@ -55,6 +55,10 @@ export class EditTimeEntryComponent implements OnInit {
     const url = this.router.url;
     if (url.startsWith('/newTimeEntry')) {
       this.setCurrentOwnerId();
+
+      const timeSheetId = this.route.snapshot.paramMap.get('id');
+      this.record.timeSheetId = timeSheetId;
+
       this.editingNewRecord = true;
       setTimeout(x => this.infoBar.displayInfo("Add new TimeEntry"), 1000);
       this.viewModelReady = true;
@@ -71,7 +75,6 @@ export class EditTimeEntryComponent implements OnInit {
     this.documentsService.get(query)
       .then(data => {
         const response = data as unknown as IGenericResponse;
-        debugger;
         this.loadRecordFromResponse(response);
       })
       .catch(errors => {
@@ -112,7 +115,6 @@ export class EditTimeEntryComponent implements OnInit {
         doc.deletedAt = null;
         command.document = doc;
         this.documentsService.add(command).then(data => {
-          debugger;
           const response = data as unknown as IGenericResponse;
           currentContext.recordId = response.recordId;
           currentContext.loadRecord();
@@ -121,7 +123,6 @@ export class EditTimeEntryComponent implements OnInit {
           this.logError(currentContext, error);
         });
       } else {
-        debugger;
         const command = new UpdateDocumentCommand();
         command.document = doc;
         this.documentsService.update(command).then(data => {
@@ -134,7 +135,7 @@ export class EditTimeEntryComponent implements OnInit {
   }
 
   onClose() {
-    this.router.navigate(['/listTimeEntrys']);
+    this.router.navigate(['/listTimeEntrys/' + this.record.timeSheetId]);
   }
 
   private getDocFromRecord() {

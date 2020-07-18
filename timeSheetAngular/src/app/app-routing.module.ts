@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'newTimeSheet', component: EditTimeSheetComponent },  
 
   { path: 'editTimeEntry/:id', component: EditTimeEntryComponent },
-  { path: 'listTimeEntrys', component: ListTimeEntryComponent },
-  { path: 'newTimeEntry', component: EditTimeEntryComponent },    
+  { path: 'listTimeEntrys/:id', component: ListTimeEntryComponent },
+  { path: 'newTimeEntry/:id', component: EditTimeEntryComponent },    
 
   { path: 'login', component: LoginComponent },
   { path: 'userSignup', component: UserSignupComponent },

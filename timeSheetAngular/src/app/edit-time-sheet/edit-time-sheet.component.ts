@@ -109,6 +109,7 @@ export class EditTimeSheetComponent implements OnInit {
         doc.createdAt = null;
         doc.updatedAt = null;
         doc.deletedAt = null;
+        doc.collectionName = "TimeSheet";
         command.document = doc;
         this.documentsService.add(command).then(data => {
           const response = data as unknown as IGenericResponse;

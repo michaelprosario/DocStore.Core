@@ -10,6 +10,7 @@ import { IDocumentListResponse } from '../core/responses/document.list.response'
 })
 export class ListTimeEntryComponent implements OnInit {
   records: any[];
+  timeSheetId: string;
 
   constructor(
     private router: Router,
@@ -20,6 +21,7 @@ export class ListTimeEntryComponent implements OnInit {
   ngOnInit() {
     const query = new GetDocumentsByCollectionQuery();
     query.collection = 'TimeEntry';
+    this.timeSheetId = this.route.snapshot.paramMap.get('id');
 
     this.docsService.getAll(query).then(serverResponse => {
       const response = serverResponse as unknown as IDocumentListResponse;
@@ -31,7 +33,7 @@ export class ListTimeEntryComponent implements OnInit {
   }
 
   onNewRecord() {
-    this.router.navigate(['/newTimeEntry']);
+    this.router.navigate(['/newTimeEntry/' + this.timeSheetId]);
   }
 
   openRecord(recordId: string) {
