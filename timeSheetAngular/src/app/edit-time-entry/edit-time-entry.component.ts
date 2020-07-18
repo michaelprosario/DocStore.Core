@@ -9,6 +9,7 @@ import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
 import { TimeEntry, TimeEntryValidator } from './edit-time-entry';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'app-edit-time-entry',
@@ -54,18 +55,26 @@ export class EditTimeEntryComponent implements OnInit {
   setupForm() {
     const url = this.router.url;
     if (url.startsWith('/newTimeEntry')) {
-      this.setCurrentOwnerId();
-
-      const timeSheetId = this.route.snapshot.paramMap.get('id');
-      this.record.timeSheetId = timeSheetId;
-
-      this.editingNewRecord = true;
-      setTimeout(x => this.infoBar.displayInfo("Add new TimeEntry"), 1000);
-      this.viewModelReady = true;
+      this.setupNewRecord();
     } else if (url.startsWith('/editTimeEntry')) {
       this.recordId = this.route.snapshot.paramMap.get('id');
       this.loadRecord();
     }
+  }
+
+  private setupNewRecord() {
+    this.setCurrentOwnerId();
+    this.setTimeSheetId();
+    this.editingNewRecord = true;
+    const currentDate = moment().format("YYYY-MM-DD");
+    this.record.entryDate = currentDate;
+    setTimeout(x => this.infoBar.displayInfo("Add new TimeEntry"), 1000);
+    this.viewModelReady = true;
+  }
+
+  private setTimeSheetId() {
+    const timeSheetId = this.route.snapshot.paramMap.get('id');
+    this.record.timeSheetId = timeSheetId;
   }
 
   loadRecord() {
