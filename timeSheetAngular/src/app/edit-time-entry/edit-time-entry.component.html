@@ -37,8 +37,9 @@
             <div class="control-group">
               <label class="control-label" for="projectCode">Project code</label>
               <div class="controls">
-                <input type="text" id="projectCode" name="projectCode" placeholder="Enter Project code"
-                  [(ngModel)]="record.projectCode" />
+                <select [(ngModel)]="record.projectCode">
+                  <option *ngFor="let project of projects" value="{{project}}">{{project}}</option>
+                </select>
               </div>
             </div>
             <div class="control-group">
@@ -73,7 +74,7 @@
             <div class="control-group">
               <label class="control-label" for="endTime">End time</label>
               <div class="controls">
-                <input type="time" id="endTime" name="endTime" placeholder="Enter End time" [(ngModel)]="record.endTime" />
+                <input type="time" id="endTime" name="endTime" placeholder="Enter End time" [(ngModel)]="record.endTime"  (blur)="onBlurEndTime()" />
               </div>
             </div>
             <div class="control-group">

@@ -8,6 +8,7 @@ import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { InfoBarComponent } from '../info-bar/info-bar.component';
 import { TimeEntry, TimeEntryValidator } from './edit-time-entry';
+import { TimeSheetConfig } from '../time-sheet-config';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
 import * as moment from 'moment'; 
 
@@ -25,6 +26,7 @@ export class EditTimeEntryComponent implements OnInit {
   record: TimeEntry;
   recordId: string;
   recordName: string = "TimeEntry";
+  public projects: Array<string> = TimeSheetConfig.projects;
   statusText: string;
   viewModelReady: boolean;
 
@@ -53,6 +55,7 @@ export class EditTimeEntryComponent implements OnInit {
   }
 
   setupForm() {
+    //debugger;
     const url = this.router.url;
     if (url.startsWith('/newTimeEntry')) {
       this.setupNewRecord();
@@ -187,5 +190,27 @@ export class EditTimeEntryComponent implements OnInit {
 
   onNew() {
     this.router.navigate(['/newTimeEntry']);
+  }
+
+  calculateHours(){
+    
+    let strTime1 = this.record.startTime;
+    let strTime2 = this.record.endTime;
+    let strTime1Parts = strTime1.split(':');
+    let strTime2Parts = strTime2.split(':');
+
+    let hours1 = parseInt(strTime1Parts[0]);
+    let hours2 = parseInt(strTime2Parts[0]);
+    let minutes1 = parseInt(strTime1Parts[1]);
+    let minutes2 = parseInt(strTime2Parts[1]);
+
+    let deltaHours = hours2 - hours1;
+    let deltaMinutes = minutes2 - minutes1;
+
+    this.record.hours = deltaHours + (deltaMinutes/60);
+  }
+
+  onBlurEndTime(){
+    this.calculateHours();
   }
 }
