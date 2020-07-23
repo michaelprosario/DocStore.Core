@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 
 namespace DocStore.Server
 {
@@ -83,6 +84,16 @@ namespace DocStore.Server
             services.AddScoped(typeof(IUserService), typeof(UsersService));
 
             services.AddSwaggerDocument();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "CorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                                    .WithHeaders(HeaderNames.ContentType, "application/json")
+                                    .WithMethods("PUT", "DELETE", "GET", "OPTIONS", "POST")        
+                    );
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,15 +110,12 @@ namespace DocStore.Server
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
             
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
