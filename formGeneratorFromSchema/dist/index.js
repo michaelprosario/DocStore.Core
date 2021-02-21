@@ -40,28 +40,24 @@ function buildAsset(templatePath, templateName, path, assetName) {
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path);
     }
-    let fileName = `${path}\\${assetName}`;
+    let fileName = `${path}//${assetName}`;
     console.log(`Writing ${path}`);
     fs.writeFileSync(fileName, output);
 }
 let templateLocation = './templates/angular-forms/';
-let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/app";
+let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/app/";
 const codeGen = new code_gen_1.CodeGen();
 let testSchema = fs.readFileSync('./schemas/project.json', { encoding: 'utf8', flag: 'r' });
 testSchema = JSON.parse(testSchema);
 console.log(testSchema);
 enhanceSchema(testSchema);
-/*
 let listComponentName = `list-${testSchema.typeParamCase}`;
 let editComponentName = `edit-${testSchema.typeParamCase}`;
 let editComponentPath = basePath + editComponentName;
 let listComponentPath = basePath + listComponentName;
-
 buildAsset(templateLocation, 'entity.ts.template', editComponentPath, `${editComponentName}.ts`);
-buildAsset(templateLocation, 'form-edit.html.template', editComponentPath,`${editComponentName}.component.html`);
+buildAsset(templateLocation, 'form-edit.html.template', editComponentPath, `${editComponentName}.component.html`);
 buildAsset(templateLocation, 'form-edit.ts.template', editComponentPath, `${editComponentName}.component.ts`);
-
 buildAsset(templateLocation, 'list-entities.ts.template', listComponentPath, `${listComponentName}.component.ts`);
 buildAsset(templateLocation, 'list-entities.html.template', listComponentPath, `${listComponentName}.component.html`);
-*/ 
 //# sourceMappingURL=index.js.map

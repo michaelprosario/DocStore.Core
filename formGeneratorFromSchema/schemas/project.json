@@ -19,6 +19,14 @@
           "description": "Name of project",
           "default": "",
           "examples": []
-      }
+      },
+      "description": {
+        "$id": "#/properties/description",
+        "type": "string",
+        "title": "Description of project",
+        "description": "Description of project",
+        "default": "",
+        "examples": []
+        }         
  }
 }
