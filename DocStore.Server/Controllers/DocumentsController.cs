@@ -3,7 +3,6 @@ using DocStore.Core.Requests;
 using DocStore.Core.Responses;
 using DocStore.Core.Services;
 using DocStore.Core.Utilities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocStore.Server.Controllers

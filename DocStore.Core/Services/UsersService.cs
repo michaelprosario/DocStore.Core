@@ -71,6 +71,8 @@ namespace DocStore.Core.Services
 
         public NewRecordResponse RegisterUser(RegisterUserCommand command)
         {
+            Require.ObjectNotNull(command, "command is required");
+
             var response = new NewRecordResponse
             {
                 Code = ResponseCode.Success

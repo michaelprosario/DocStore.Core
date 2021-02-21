@@ -13,11 +13,9 @@ namespace DocStore.Core.Entities
         [DataMember] public DateTime? DeletedAt { get; set; }
         [DataMember] public string DeletedBy { get; set; } = "";
 
-        [Key]
-        [DataMember]  
-        public string Id { get; set; } = "";
+        [Key] [DataMember] public string Id { get; set; } = "";
 
-        [DataMember] public bool IsDeleted { get; set; } = false;
+        [DataMember] public bool IsDeleted { get; set; }
         [DataMember] public string JsonData { get; set; } = "";
         [DataMember] public string Name { get; set; } = "";
         [DataMember] public DateTime? UpdatedAt { get; set; }

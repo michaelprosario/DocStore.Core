@@ -50,10 +50,8 @@ namespace DocStore.Server
                             var userId = context.Principal.Identity.Name;
                             var user = userService.GetById(userId);
                             if (user == null)
-                            {
                                 // return unauthorized if user no longer exists
                                 context.Fail("Unauthorized");
-                            }
 
                             return Task.CompletedTask;
                         }
@@ -78,7 +76,7 @@ namespace DocStore.Server
             services.AddControllersWithViews();
             services.AddSingleton<AppSettingsLoader>();
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-            services.AddScoped(typeof(IDocumentsRepository), typeof(DocumentsRepository));
+            services.AddScoped(typeof(IDocumentsQueryRepository), typeof(DocumentsQueryRepository));
             services.AddScoped(typeof(IDocumentsService), typeof(DocumentsService));
             services.AddScoped(typeof(IUserDataServices), typeof(UserDataServices));
             services.AddScoped(typeof(IUserService), typeof(UsersService));
@@ -87,13 +85,12 @@ namespace DocStore.Server
 
             services.AddCors(options =>
             {
-                options.AddPolicy(name: "CorsPolicy",
+                options.AddPolicy("CorsPolicy",
                     builder => builder.WithOrigins("http://localhost:4200")
-                                    .WithHeaders(HeaderNames.ContentType, "application/json")
-                                    .WithMethods("PUT", "DELETE", "GET", "OPTIONS", "POST")        
-                    );
+                        .WithHeaders(HeaderNames.ContentType, "application/json")
+                        .WithMethods("PUT", "DELETE", "GET", "OPTIONS", "POST")
+                );
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,7 +111,7 @@ namespace DocStore.Server
             app.UseStaticFiles();
 
             app.UseRouting();
-            
+
             app.UseCors("CorsPolicy");
 
             app.UseAuthentication();

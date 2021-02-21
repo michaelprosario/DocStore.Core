@@ -3,7 +3,7 @@ using DocStore.Core.Entities;
 
 namespace DocStore.Core.Interfaces
 {
-    public interface IDocumentsRepository
+    public interface IDocumentsQueryRepository
     {
         IQueryable<Doc> GetDocumentsByCollection(string collection);
     }

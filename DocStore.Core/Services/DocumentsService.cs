@@ -12,25 +12,24 @@ namespace DocStore.Core.Services
 {
     public class DocumentsService : IDocumentsService
     {
-        private readonly IDocumentsRepository _documentsRepository;
+        private readonly IDocumentsQueryRepository _documentsQueryRepository;
         private readonly IRepository<Doc> _repository;
 
-        public DocumentsService(IRepository<Doc> repository, IDocumentsRepository documentsRepository)
+        public DocumentsService(IRepository<Doc> repository, IDocumentsQueryRepository documentsQueryRepository)
         {
             Require.ObjectNotNull(repository, "repository should be defined");
-            Require.ObjectNotNull(documentsRepository, "documentsRepository should be defined");
+            Require.ObjectNotNull(documentsQueryRepository, "documentsRepository should be defined");
             _repository = repository;
-            _documentsRepository = documentsRepository;
+            _documentsQueryRepository = documentsQueryRepository;
         }
 
         public NewRecordResponse AddDocument(AddDocumentCommand command)
         {
+            Require.ObjectNotNull(command, "command is required");
             var response = new NewRecordResponse
             {
                 Code = ResponseCode.Success
             };
-
-            Require.ObjectNotNull(command, "Request is null.");
 
             var validationResult = new AddDocumentCommandValidator().Validate(command);
             if (!validationResult.IsValid)
@@ -39,9 +38,7 @@ namespace DocStore.Core.Services
                 return response;
             }
 
-            command.Document.CreatedAt = DateTime.Now;
-            command.Document.CreatedBy = "fixme";
-            command.Document.Id = Guid.NewGuid().ToString();
+            PopulateNewDocumentFields(command.Document, command.UserId);
 
             var doc = _repository.Add(command.Document);
             response.RecordId = doc.Id;
@@ -49,14 +46,59 @@ namespace DocStore.Core.Services
             return response;
         }
 
+        public Doc PopulateNewDocumentFields(Doc document, string userId)
+        {
+            Require.ObjectNotNull(document,"document is required");
+            document.CreatedAt = DateTime.Now;
+            document.CreatedBy = userId;
+            if (string.IsNullOrEmpty(document.Id))
+            {
+                document.Id = Guid.NewGuid().ToString();    
+            }
+            
+            return document;
+        }
+
+        public StoreDocumentResponse StoreDocument(StoreDocumentCommand command)
+        {
+            Require.ObjectNotNull(command,"command is defined");
+            var response = new StoreDocumentResponse();
+            var validationResult = new StoreDocumentCommandValidator().Validate(command);
+            if (!validationResult.IsValid)
+            {
+                response.ValidationErrors = validationResult.Errors;
+                return response;
+            }
+            
+            var recordExists = _repository.RecordExists(command.Document.Id);
+            string currentRecordId = "";
+            if (recordExists)
+            {
+                currentRecordId = command.Document.Id;
+                PopulateDocumentForUpdate(command.Document, command.UserId);
+                _repository.Update(command.Document);
+            }
+            else
+            {
+                PopulateNewDocumentFields(command.Document, command.UserId);
+                var newDocument = _repository.Add(command.Document);
+                currentRecordId = newDocument.Id;
+            }
+
+            var documentToReturn = _repository.GetById(currentRecordId);
+            response.Document = documentToReturn;
+            return response;
+        }
+
         public Response UpdateDocument(UpdateDocumentCommand command)
         {
+            Require.ObjectNotNull(command, "Command is required");
+
             var response = new Response
             {
                 Code = ResponseCode.Success
             };
 
-            Require.ObjectNotNull(command, "Request is null.");
             var validationResult = new UpdateDocumentCommandValidator().Validate(command);
             if (!validationResult.IsValid)
             {
@@ -65,12 +107,16 @@ namespace DocStore.Core.Services
                 return response;
             }
 
-            command.Document.UpdatedAt = DateTime.Now;
-            command.Document.UpdatedBy = "fixme";
-
+            PopulateDocumentForUpdate(command.Document, command.UserId);
             _repository.Update(command.Document);
 
             return response;
+        }
+
+        private void PopulateDocumentForUpdate(Doc document, string userId)
+        {
+            document.UpdatedAt = DateTime.Now;
+            document.UpdatedBy = userId;
         }
 
         public GetDocumentsResponse GetDocumentsByCollection(GetDocumentsByCollection query)
@@ -87,7 +133,7 @@ namespace DocStore.Core.Services
                 return response;
             }
 
-            var list = _documentsRepository.GetDocumentsByCollection(query.Collection);
+            var list = _documentsQueryRepository.GetDocumentsByCollection(query.Collection);
             return new GetDocumentsResponse
             {
                 Documents = list.ToList()
@@ -117,12 +163,12 @@ namespace DocStore.Core.Services
 
         public Response DeleteDocument(DeleteDocumentCommand command)
         {
+            Require.ObjectNotNull(command, "Command is required");
             var response = new Response
             {
                 Code = ResponseCode.Success
             };
 
-            Require.ObjectNotNull(command, "Request is null.");
             var validationResult = new DeleteDocumentCommandValidator().Validate(command);
             if (!validationResult.IsValid)
             {

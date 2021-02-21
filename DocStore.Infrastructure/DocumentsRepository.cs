@@ -6,11 +6,11 @@ using DocStore.Core.Utilities;
 
 namespace DocStore.Infrastructure
 {
-    public class DocumentsRepository : IDocumentsRepository
+    public class DocumentsQueryRepository : IDocumentsQueryRepository
     {
         private readonly EfContext _dbContext;
 
-        public DocumentsRepository(EfContext dbContext)
+        public DocumentsQueryRepository(EfContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
@@ -18,7 +18,7 @@ namespace DocStore.Infrastructure
         public IQueryable<Doc> GetDocumentsByCollection(string collection)
         {
             Require.NotNullOrEmpty(collection, "collection needs to be defined");
-            return _dbContext.Set<Doc>().Where(e => e.CollectionName.Equals(collection)  && e.IsDeleted == false);
+            return _dbContext.Set<Doc>().Where(e => e.CollectionName.Equals(collection) && e.IsDeleted == false);
         }
     }
 }

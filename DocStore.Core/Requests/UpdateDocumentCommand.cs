@@ -1,6 +1,5 @@
-﻿using DocStore.Core.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using DocStore.Core.Entities;
 
 namespace DocStore.Core.Requests
 {

@@ -1,7 +1,6 @@
 ﻿using System;
-using DocStore.Core.Interfaces;
-using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using DocStore.Core.Interfaces;
 
 namespace DocStore.Core.Entities
 {

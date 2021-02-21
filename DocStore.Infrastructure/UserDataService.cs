@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DocStore.Core.Entities;
 using DocStore.Core.Interfaces;
+using DocStore.Core.Utilities;
 
 namespace DocStore.Infrastructure
 {
@@ -32,17 +33,21 @@ namespace DocStore.Infrastructure
             _dbContext.SaveChanges();
         }
 
+        public bool RecordExists(string id)
+        {
+            Require.NotNullOrEmpty(id, "id is required");
+            return _dbContext.Set<User>().Count(e => e.Id.Equals(id)) > 0;
+        }
+
         public User GetById(string id)
         {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Id needs to be defined");
-
+            Require.NotNullOrEmpty(id, "id is required");
             return _dbContext.Set<User>().SingleOrDefault(e => e.Id.Equals(id));
         }
 
         public User GetUserByName(string userName)
         {
-            if (string.IsNullOrEmpty(userName)) throw new ArgumentException("UserName needs to be defined");
-
+            Require.NotNullOrEmpty(userName, "userName is required");
             return _dbContext.Set<User>().SingleOrDefault(e => e.UserName.Equals(userName));
         }
 

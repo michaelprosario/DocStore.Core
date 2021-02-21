@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DocStore.Core.Entities;
 using DocStore.Core.Interfaces;
+using DocStore.Core.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DocStore.Infrastructure
@@ -21,6 +22,12 @@ namespace DocStore.Infrastructure
             if (string.IsNullOrEmpty(id)) throw new ArgumentException("message", nameof(id));
 
             return _dbContext.Set<T>().SingleOrDefault(e => e.Id.Equals(id));
+        }
+
+        public bool RecordExists(string id)
+        {
+            Require.NotNullOrEmpty(id, "id is required");
+            return _dbContext.Set<T>().Count(e => e.Id.Equals(id)) > 0;
         }
 
         public List<T> List()

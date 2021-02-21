@@ -22,24 +22,21 @@ namespace DocStore.Server.Controllers
     {
         private readonly IUserService _userService;
 
-        private AppSettings _settings { get; }
-
         public UsersController(IUserService userService, IOptions<AppSettings> settings)
         {
             _userService = userService;
             _settings = settings.Value;
         }
 
+        private AppSettings _settings { get; }
+
         [AllowAnonymous]
         [HttpPost("Authenticate")]
-        public IActionResult Authenticate([FromBody]UserDto userDto)
+        public IActionResult Authenticate([FromBody] UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
-            if (user == null)
-            {
-                return BadRequest(new { message = "Username or password is incorrect" });
-            }
+            if (user == null) return BadRequest(new {message = "Username or password is incorrect"});
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.AuthKey);
@@ -48,10 +45,11 @@ namespace DocStore.Server.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Id),
-                    new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, user.UserName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
@@ -66,7 +64,7 @@ namespace DocStore.Server.Controllers
                 Token = tokenString
             });
         }
-        
+
         [AllowAnonymous]
         [HttpPost("RegisterUser")]
         public NewRecordResponse RegisterUser([FromBody] RegisterUserCommand command)

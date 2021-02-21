@@ -1,10 +1,10 @@
-﻿using System.Runtime.Serialization;
+using System.Runtime.Serialization;
 using DocStore.Core.Entities;
 
 namespace DocStore.Core.Requests
 {
     [DataContract]
-    public class AddDocumentCommand : Request
+    public class StoreDocumentCommand : Request
     {
         [DataMember] public Doc Document { get; set; }
     }
