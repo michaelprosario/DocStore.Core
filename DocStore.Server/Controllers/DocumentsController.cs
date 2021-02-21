@@ -37,6 +37,13 @@ namespace DocStore.Server.Controllers
             command.UserId = GetUserName();
             return _documentsService.UpdateDocument(command);
         }
+        
+        [HttpPost("StoreDocument")]
+        public StoreDocumentResponse StoreDocument([FromBody] StoreDocumentCommand command)
+        {
+            command.UserId = GetUserName();
+            return _documentsService.StoreDocument(command);
+        }        
 
         [HttpPost("DeleteDocument")]
         public Response DeleteDocument([FromBody] DeleteDocumentCommand command)

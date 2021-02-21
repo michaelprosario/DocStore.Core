@@ -9,6 +9,7 @@ namespace DocStore.Core.Services
         Response DeleteDocument(DeleteDocumentCommand command);
         GetDocumentResponse GetDocument(GetDocumentQuery query);
         Response UpdateDocument(UpdateDocumentCommand command);
+        StoreDocumentResponse StoreDocument(StoreDocumentCommand command);
         GetDocumentsResponse GetDocumentsByCollection(GetDocumentsByCollection query);
     }
 }
