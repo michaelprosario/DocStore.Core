@@ -44,13 +44,13 @@ function buildAsset(templatePath, templateName, path, assetName) {
         fs.mkdirSync(path);
     }
 
-    let fileName = `${path}\\${assetName}`;
+    let fileName = `${path}//${assetName}`;
     console.log(`Writing ${path}`);
     fs.writeFileSync(fileName, output);
 }
 
 let templateLocation = './templates/angular-forms/';
-let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/app";
+let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/app/";
 const codeGen = new CodeGen();
 let testSchema = fs.readFileSync('./schemas/project.json', {encoding:'utf8', flag:'r'});
 testSchema = JSON.parse(testSchema);
