@@ -9,6 +9,7 @@ namespace DocStore.Server.Controllers
 {
     //[Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class DocumentsController : Controller
     {
         private readonly IDocumentsService _documentsService;
@@ -23,7 +24,7 @@ namespace DocStore.Server.Controllers
             return "fixme";
         }
 
-        [HttpPost("AddDocument")]
+        [HttpPost("v1/AddDocument")]
         public NewRecordResponse AddDocument([FromBody] AddDocumentCommand command)
         {
             Require.ObjectNotNull(command, "command should not be null");
@@ -31,28 +32,28 @@ namespace DocStore.Server.Controllers
             return _documentsService.AddDocument(command);
         }
 
-        [HttpPost("EditDocument")]
+        [HttpPost("v1/EditDocument")]
         public Response EditDocument([FromBody] UpdateDocumentCommand command)
         {
             command.UserId = GetUserName();
             return _documentsService.UpdateDocument(command);
         }
         
-        [HttpPost("StoreDocument")]
+        [HttpPost("v1/StoreDocument")]
         public StoreDocumentResponse StoreDocument([FromBody] StoreDocumentCommand command)
         {
             command.UserId = GetUserName();
             return _documentsService.StoreDocument(command);
         }        
 
-        [HttpPost("DeleteDocument")]
+        [HttpPost("v1/DeleteDocument")]
         public Response DeleteDocument([FromBody] DeleteDocumentCommand command)
         {
             command.UserId = GetUserName();
             return _documentsService.DeleteDocument(command);
         }
 
-        [HttpPost("GetDocumentsByCollection")]
+        [HttpPost("v1/GetDocumentsByCollection")]
         public GetDocumentsResponse GetDocumentsByCollection([FromBody] GetDocumentsByCollection query)
         {
             Require.ObjectNotNull(query, "query is null");
@@ -60,7 +61,7 @@ namespace DocStore.Server.Controllers
             return _documentsService.GetDocumentsByCollection(query);
         }
 
-        [HttpPost("GetDocument")]
+        [HttpPost("v1/GetDocument")]
         public GetDocumentResponse GetDocument([FromBody] GetDocumentQuery query)
         {
             Require.ObjectNotNull(query, "query should not be null");

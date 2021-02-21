@@ -17,7 +17,7 @@ namespace DocStore.Server.Controllers
     // Implementation based largely on http://jasonwatmore.com/post/2018/06/26/aspnet-core-21-simple-api-for-authentication-registration-and-user-management#user-dto-cs
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -31,7 +31,7 @@ namespace DocStore.Server.Controllers
         private AppSettings _settings { get; }
 
         [AllowAnonymous]
-        [HttpPost("Authenticate")]
+        [HttpPost("v1/Authenticate")]
         public IActionResult Authenticate([FromBody] UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
@@ -66,7 +66,7 @@ namespace DocStore.Server.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("RegisterUser")]
+        [HttpPost("v1/RegisterUser")]
         public NewRecordResponse RegisterUser([FromBody] RegisterUserCommand command)
         {
             return _userService.RegisterUser(command);
