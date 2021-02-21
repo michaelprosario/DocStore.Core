@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "Project",
+  "title": "Project schema",
+  "description": "",
+  "default": {},
+  "examples": [],
+  "required": [
+      "name"
+  ],
+  "additionalProperties": true,
+  "properties": {
+      "name": {
+          "$id": "#/properties/name",
+          "type": "string",
+          "title": "Name of project",
+          "description": "Name of project",
+          "default": "",
+          "examples": []
+      }
+ }
+}
