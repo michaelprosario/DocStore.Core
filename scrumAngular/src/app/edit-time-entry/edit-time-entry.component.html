@@ -1,0 +1,107 @@
+<style>
+  .txtNotes {
+    width: 400px;
+    height: 300px;
+  }
+
+  .divHidden {
+    display: none;
+  }
+
+  .txtTask {
+    width: 400px;
+  }
+</style>
+
+
+
+<div class="card" *ngIf="record">
+  <h3 class="card-header text-center font-weight-bold py-4">TimeEntry edit</h3>
+  <div class="card-body">
+    <div class="container">
+      <app-tool-bar (closeRecord)="onClose()" (deleteRecord)="onDelete()" (newRecord)="onNew()" (newRecord)="onNew()"
+        (saveAndCloseRecord)="onPostSave(true)" (saveRecord)="onPostSave(false)"></app-tool-bar>
+      <app-info-bar></app-info-bar>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="control-group divHidden">
+              <label class="control-label" for="timeSheetId">Time sheet id</label>
+              <div class="controls">
+                <input type="text" id="timeSheetId" name="timeSheetId" placeholder="Enter Time sheet id"
+                  [(ngModel)]="record.timeSheetId" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="projectCode">Project code</label>
+              <div class="controls">
+                <select [(ngModel)]="record.projectCode">
+                  <option *ngFor="let project of projects" value="{{project}}">{{project}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="workItemId">Work item id</label>
+              <div class="controls">
+                <input type="text" id="workItemId" name="workItemId" placeholder="Enter Work item id"
+                  [(ngModel)]="record.workItemId" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="task">Task</label>
+              <div class="controls">
+                <input type="text" id="task" name="task" class="txtTask" placeholder="Enter Task" [(ngModel)]="record.task" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="notes">Notes</label>
+              <div class="controls">
+                <textarea type="text" id="notes" name="notes" class="txtNotes" placeholder="Enter Notes"
+                  [(ngModel)]="record.notes"></textarea>
+              </div>
+            </div>      
+          </div>
+          <div class="col-sm">
+            <div class="control-group">
+              <label class="control-label" for="startTime">Start time</label>
+              <div class="controls">
+                <input type="time" id="startTime" name="startTime" placeholder="Enter Start time"
+                  [(ngModel)]="record.startTime" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="endTime">End time</label>
+              <div class="controls">
+                <input type="time" id="endTime" name="endTime" placeholder="Enter End time" [(ngModel)]="record.endTime"  (blur)="onBlurEndTime()" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="entryDate">Entry date</label>
+              <div class="controls">
+                <input type="date" id="entryDate" name="entryDate" placeholder="Enter Entry date"
+                  [(ngModel)]="record.entryDate" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="hours">Hours</label>
+              <div class="controls">
+                <input type="number" id="hours" name="hours" placeholder="Enter Hours" [(ngModel)]="record.hours" />
+              </div>
+            </div>
+            <div class="control-group divHidden">
+              <label class="control-label" for="ownerId">Owner id</label>
+              <div class="controls">
+                <input type="text" id="ownerId" name="ownerId" placeholder="Enter Owner id" [(ngModel)]="record.ownerId" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

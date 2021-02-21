@@ -1,0 +1,11 @@
+<div class="alert alert-warning" role="alert" *ngIf="state === 1">
+    {{ message }}  
+</div>
+<div class="alert alert-warning" role="alert" *ngIf="state === 2">
+  Created {{ timeStamp | date:'medium' }} by {{ userName }}
+</div>
+<div class="alert alert-warning" role="alert" *ngIf="state === 3">
+    <li *ngFor="let error of errors">
+    {{ error }}
+    </li>
+</div>
