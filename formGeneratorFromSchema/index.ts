@@ -19,6 +19,10 @@ if (a == b) {
 });
 
 function enhanceSchema(schema){
+    if(!schema.typeName){
+        throw new Error("Error - schema.typeName is required");
+    }
+
     schema.typePascalCase = pascalCase(schema.typeName);
     schema.typeParamCase = paramCase(schema.typeName);
     
@@ -50,7 +54,9 @@ let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/
 const codeGen = new CodeGen();
 let testSchema = fs.readFileSync('./schemas/project.json', {encoding:'utf8', flag:'r'});
 testSchema = JSON.parse(testSchema);
+console.log(testSchema);
 enhanceSchema(testSchema);
+
 
 let listComponentName = `list-${testSchema.typeParamCase}`;
 let editComponentName = `edit-${testSchema.typeParamCase}`;

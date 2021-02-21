@@ -20,6 +20,9 @@ Handlebars.registerHelper('if_eq', function (a, b, opts) {
     }
 });
 function enhanceSchema(schema) {
+    if (!schema.typeName) {
+        throw new Error("Error - schema.typeName is required");
+    }
     schema.typePascalCase = change_case_1.pascalCase(schema.typeName);
     schema.typeParamCase = change_case_1.paramCase(schema.typeName);
     for (let propName of Object.keys(schema.properties)) {
@@ -42,18 +45,23 @@ function buildAsset(templatePath, templateName, path, assetName) {
     fs.writeFileSync(fileName, output);
 }
 let templateLocation = './templates/angular-forms/';
-let basePath = "C:\\dev\\DocStore.Core\\timeSheetAngular\\src\\app";
+let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/scrumAngular/src/app";
 const codeGen = new code_gen_1.CodeGen();
-let testSchema = fs.readFileSync('./schemas/timeSheet.json', { encoding: 'utf8', flag: 'r' });
+let testSchema = fs.readFileSync('./schemas/project.json', { encoding: 'utf8', flag: 'r' });
 testSchema = JSON.parse(testSchema);
+console.log(testSchema);
 enhanceSchema(testSchema);
+/*
 let listComponentName = `list-${testSchema.typeParamCase}`;
 let editComponentName = `edit-${testSchema.typeParamCase}`;
 let editComponentPath = basePath + editComponentName;
 let listComponentPath = basePath + listComponentName;
+
 buildAsset(templateLocation, 'entity.ts.template', editComponentPath, `${editComponentName}.ts`);
-buildAsset(templateLocation, 'form-edit.html.template', editComponentPath, `${editComponentName}.component.html`);
+buildAsset(templateLocation, 'form-edit.html.template', editComponentPath,`${editComponentName}.component.html`);
 buildAsset(templateLocation, 'form-edit.ts.template', editComponentPath, `${editComponentName}.component.ts`);
+
 buildAsset(templateLocation, 'list-entities.ts.template', listComponentPath, `${listComponentName}.component.ts`);
 buildAsset(templateLocation, 'list-entities.html.template', listComponentPath, `${listComponentName}.component.html`);
+*/ 
 //# sourceMappingURL=index.js.map
