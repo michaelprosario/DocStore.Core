@@ -19,7 +19,7 @@ export class List{{typePascalCase}}Component implements OnInit {
 
   ngOnInit() {
     const query = new GetDocumentsByCollectionQuery();
-    query.collectionName = '{{typePascalCase}}';
+    query.collection = '{{typePascalCase}}';
 
     this.docsService.getAll(query).then(serverResponse => {
       const response = serverResponse as unknown as IDocumentListResponse;

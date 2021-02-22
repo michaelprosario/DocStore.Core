@@ -47,8 +47,7 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
   private setCurrentOwnerId() {
     let userJson = localStorage.getItem("currentUser");
     let currentUser = JSON.parse(userJson);
-    let currentUserId = currentUser.id;
-    this.record.ownerId = currentUserId;
+    let currentUserId = currentUser.id;    
   }
 
   setupForm() {
@@ -136,8 +135,7 @@ export class Edit{{ typePascalCase }}Component implements OnInit {
 
   private getDocFromRecord() {
     const doc = this.currentDocument;
-    doc.jsonData = JSON.stringify(this.record);
-    doc.name = this.record.weekEnding;
+    doc.jsonData = JSON.stringify(this.record);    
     return doc;
   }
 

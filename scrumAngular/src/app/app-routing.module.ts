@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserSignupComponent } from './user-signup/user-signup.component';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ListProjectComponent } from './list-project/list-project.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -15,6 +17,10 @@ const routes: Routes = [
   { path: 'editTimeSheet/:id', component: EditTimeSheetComponent },
   { path: 'listTimeSheets', component: ListTimeSheetComponent },
   { path: 'newTimeSheet', component: EditTimeSheetComponent },  
+
+  { path: 'editProject/:id', component: EditProjectComponent },
+  { path: 'listProjects', component: ListProjectComponent },
+  { path: 'newProject', component: EditProjectComponent },    
 
   { path: 'editTimeEntry/:id', component: EditTimeEntryComponent },
   { path: 'listTimeEntrys/:id', component: ListTimeEntryComponent },

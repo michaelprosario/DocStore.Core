@@ -19,7 +19,7 @@ export class ListProjectComponent implements OnInit {
 
   ngOnInit() {
     const query = new GetDocumentsByCollectionQuery();
-    query.collectionName = 'Project';
+    query.collection = 'Project';
 
     this.docsService.getAll(query).then(serverResponse => {
       const response = serverResponse as unknown as IDocumentListResponse;

@@ -20,16 +20,20 @@ import { SiteHeaderComponent } from './site-header/site-header.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { UserSignupComponent } from './user-signup/user-signup.component';
 import { UsersService } from './core/services/users.service';
+import { EditProjectComponent } from './edit-project/edit-project.component';
+import { ListProjectComponent } from './list-project/list-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EditTimeSheetComponent,
     EditTimeEntryComponent,
+    EditProjectComponent,
     HomeComponent,
     InfoBarComponent,
     ListTimeSheetComponent,
     ListTimeEntryComponent,
+    ListProjectComponent,
     LoginComponent,
     SiteHeaderComponent,
     ToolBarComponent,
