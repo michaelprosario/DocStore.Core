@@ -8,6 +8,7 @@ namespace DocStore.Core.Validators
         public UpdateDocumentCommandValidator()
         {
             RuleFor(x => x.Document).NotNull();
+            RuleFor(x => x.Document.Name).NotNull().NotEmpty();
             RuleFor(x => x.Document.CollectionName).NotNull().NotEmpty();
             RuleFor(x => x.Document.JsonData).NotNull().NotEmpty();
             RuleFor(x => x.Document).NotNull().NotEmpty();

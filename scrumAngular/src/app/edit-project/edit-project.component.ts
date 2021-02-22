@@ -57,6 +57,8 @@ export class EditProjectComponent implements OnInit {
       this.editingNewRecord = true;
       setTimeout(x => this.infoBar.displayInfo("Add new Project"), 1000);
       this.viewModelReady = true;
+      this.currentDocument = new Doc();
+      this.currentDocument.collectionName = "Project";
     } else if (url.startsWith('/editProject')) {
       this.recordId = this.route.snapshot.paramMap.get('id');
       this.loadRecord();
@@ -70,6 +72,7 @@ export class EditProjectComponent implements OnInit {
     this.documentsService.get(query)
       .then(data => {
         const response = data as unknown as IGenericResponse;
+        console.log(data);
         this.loadRecordFromResponse(response);
       })
       .catch(errors => {
@@ -98,7 +101,8 @@ export class EditProjectComponent implements OnInit {
     console.log(error);
   }
 
-  onPostSave(saveAndClose: boolean) {
+  onSave(saveAndClose: boolean) {
+
     const currentContext = this;
     if (this.formIsOkay()) {
       const doc = this.getDocFromRecord();
@@ -108,6 +112,7 @@ export class EditProjectComponent implements OnInit {
         doc.createdAt = null;
         doc.updatedAt = null;
         doc.deletedAt = null;
+
         command.document = doc;
         this.documentsService.add(command).then(data => {
           const response = data as unknown as IGenericResponse;
@@ -135,6 +140,7 @@ export class EditProjectComponent implements OnInit {
 
   private getDocFromRecord() {
     const doc = this.currentDocument;
+    doc.name = this.record.name;
     doc.jsonData = JSON.stringify(this.record);    
     return doc;
   }

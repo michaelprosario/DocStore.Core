@@ -23,6 +23,7 @@ export class ListProjectComponent implements OnInit {
 
     this.docsService.getAll(query).then(serverResponse => {
       const response = serverResponse as unknown as IDocumentListResponse;
+      
       this.records = response.documents;
     }).catch(error => {
       console.log('Error on list document operation');

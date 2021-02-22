@@ -2,8 +2,13 @@
   <h3 class="card-header text-center font-weight-bold py-4">Project edit</h3>
   <div class="card-body">
     <div class="container">
-      <app-tool-bar (closeRecord)="onClose()" (deleteRecord)="onDelete()" (newRecord)="onNew()" (newRecord)="onNew()"
-        (saveAndCloseRecord)="onPostSave(true)" (saveRecord)="onPostSave(false)"></app-tool-bar>
+      <app-tool-bar 
+        (closeRecord)="onClose()" 
+        (deleteRecord)="onDelete()" 
+        (newRecord)="onNew()" 
+        (newRecord)="onNew()"
+        (saveAndCloseRecord)="onSave(true)" 
+        (saveRecord)="onSave(false)"></app-tool-bar>
       <app-info-bar></app-info-bar>
 
       <fieldset>
@@ -17,8 +22,8 @@
         <div class="control-group">
           <label class="control-label" for="description">Description</label>
           <div class="controls">
-            <input type="text" id="description" name="description"
-              placeholder="Enter Description" [(ngModel)]="record.description" />
+            <textarea type="text" id="description" name="description"
+              placeholder="Enter Description" [(ngModel)]="record.description" style="width:800px; height:400px;"></textarea>
           </div>
         </div>
       </fieldset>
