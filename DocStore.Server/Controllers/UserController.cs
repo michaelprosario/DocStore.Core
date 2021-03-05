@@ -32,11 +32,16 @@ namespace DocStore.Server.Controllers
 
         [AllowAnonymous]
         [HttpPost("v1/Authenticate")]
-        public IActionResult Authenticate([FromBody] UserDto userDto)
+        public AuthenticateResponse Authenticate([FromBody] UserDto userDto)
         {
             var user = _userService.Authenticate(userDto.Username, userDto.Password);
 
-            if (user == null) return BadRequest(new {message = "Username or password is incorrect"});
+            if (user == null){
+              var badResponse = new AuthenticateResponse();
+              badResponse.Code = Core.Enums.ResponseCode.BadRequest;
+              badResponse.Message = "Username or password is incorrect";
+              return badResponse;  
+            }
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.AuthKey);
@@ -55,14 +60,13 @@ namespace DocStore.Server.Controllers
             var tokenString = tokenHandler.WriteToken(token);
 
             // return basic user info (without password) and token to store client side
-            return Ok(new
-            {
-                user.Id,
-                Username = user.UserName,
-                user.FirstName,
-                user.LastName,
-                Token = tokenString
-            });
+            var okResponse = new AuthenticateResponse();
+            okResponse.UserId = user.Id;
+            okResponse.Username = user.UserName;
+            okResponse.FirstName = user.FirstName;
+            okResponse.LastName = user.LastName;
+            okResponse.Token = tokenString;
+            return okResponse;
         }
 
         [AllowAnonymous]
