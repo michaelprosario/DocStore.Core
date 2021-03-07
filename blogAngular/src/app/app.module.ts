@@ -10,13 +10,15 @@ import {MenuItem} from 'primeng/api';
 import {PanelMenuModule} from 'primeng/panelmenu';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ListPostComponent } from './list-post/list-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MainMenuComponent,
-    EditPostComponent
+    EditPostComponent,
+    ListPostComponent
   ],
   imports: [
     AppRoutingModule,

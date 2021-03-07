@@ -31,10 +31,10 @@ export class ListPostComponent implements OnInit {
   }
 
   onNewRecord() {
-    this.router.navigate(['/app/newPost']);
+    this.router.navigate(['/app/new-post']);
   }
 
   openRecord(recordId: string) {
-    this.router.navigate(['/app/editPost/' + recordId]);
+    this.router.navigate(['/app/edit-post/' + recordId]);
   }
 }

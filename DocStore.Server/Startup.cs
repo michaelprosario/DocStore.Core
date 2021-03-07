@@ -86,9 +86,9 @@ namespace DocStore.Server
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:4200")
-                        .WithHeaders(HeaderNames.ContentType, "application/json")
-                        .WithMethods("PUT", "DELETE", "GET", "OPTIONS", "POST")
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
                 );
             });
         }

@@ -34,7 +34,7 @@ export class EditPostComponent implements OnInit, IEditPostView {
 
   setupForm() {
     const url = this.router.url;
-    const handleNewRecord = url.startsWith('/newPost');
+    const handleNewRecord = url.startsWith('/app/new-post');
     this.presenter.setupModel(handleNewRecord);
   }
 
@@ -59,7 +59,7 @@ export class EditPostComponent implements OnInit, IEditPostView {
   }
 
   onClose() {
-    this.router.navigate(['/listPosts']);
+    this.router.navigate(['/app/list-post']);
   }
 
   displayErrors(errors: string[]){
@@ -74,6 +74,6 @@ export class EditPostComponent implements OnInit, IEditPostView {
   }
 
   onNew() {
-    this.router.navigate(['/newPost']);
+    this.router.navigate(['/app/new-post']);
   }
 }

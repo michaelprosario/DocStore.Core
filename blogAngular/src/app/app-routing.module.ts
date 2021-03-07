@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'list-post', pathMatch: 'full' },
       { path: 'edit-post', component: EditPostComponent },
+      { path: 'new-post', component: EditPostComponent },
       { path: 'list-post', component: ListPostComponent }
     ]
   },

@@ -2,16 +2,18 @@
   <h3 class="card-header text-center font-weight-bold py-4">Post</h3>
   <div class="card-body">
     <div id="table" class="table-editable">
-      <button type="button" title="New" class="btn btn-info btn-rounded btn-sm my-0" (click)="onNewRecord()">New</button>
+      <button type="button" title="New" class="button" (click)="onNewRecord()">New</button>
       <br><br>
       <table class="table table-responsive-md table-striped">
         <tr>
           <th>Title</th>
           <th>Action</th>
         </tr>
-        <tbody *ngFor="let record of records">
-          <tr>
-            <td class="pt-3-half"></td>
+        <tbody>
+          <tr *ngFor="let record of records">
+            <td class="pt-3-half">
+              {{record.name}}
+            </td>
             <td>
               <span class="">
                 <button type="button" title="Edit record" class="btn btn-info btn-rounded btn-sm my-0"

@@ -6,6 +6,7 @@ import { GetDocumentsByCollectionQuery } from '../queries/get.documents.by.colle
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UpdateDocumentCommand } from '../commands/update.document.command';
+import { AppUser } from '../entities/app.user';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +14,19 @@ import { UpdateDocumentCommand } from '../commands/update.document.command';
 export class DocumentsService {
 
     constructor(private http: HttpClient) { }
+
+    getCurrentUser() : AppUser {
+        let userJson = localStorage.getItem("currentUser") || "{}";
+        let currentUser = JSON.parse(userJson);
+        return currentUser as AppUser;
+    }
+
     public async add(command: AddDocumentCommand) {
         if (!command) {
             throw new Error('Command is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/AddDocument`, command).toPromise();
+        return this.http.post(`${environment.apiUrl}/Documents/v1/AddDocument`, command).toPromise();
     }
 
     public async update(command: UpdateDocumentCommand) {
@@ -26,7 +34,7 @@ export class DocumentsService {
             throw new Error('Command is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/EditDocument`, command).toPromise();
+        return this.http.post(`${environment.apiUrl}/Documents/v1/EditDocument`, command).toPromise();
     }
 
     public async getAll(query: GetDocumentsByCollectionQuery) {
@@ -34,7 +42,10 @@ export class DocumentsService {
             throw new Error('query is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/GetDocumentsByCollection/`, query).toPromise();
+        //query.userId = this.getCurrentUser().userName;
+        query.userId = "me@here.com";
+
+        return this.http.post(`${environment.apiUrl}/Documents/v1/GetDocumentsByCollection/`, query).toPromise();
     }
 
     public async get(query: GetDocumentQuery) {
@@ -42,7 +53,7 @@ export class DocumentsService {
             throw new Error('query is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/GetDocument`, query).toPromise();
+        return this.http.post(`${environment.apiUrl}/Documents/v1/GetDocument`, query).toPromise();
     }
 
     public async delete(command: DeleteDocumentCommand) {
@@ -50,6 +61,6 @@ export class DocumentsService {
             throw new Error('command is not defined');
         }
 
-        return this.http.post(`${environment.apiUrl}/DeleteDocument`, command).toPromise();
+        return this.http.post(`${environment.apiUrl}/Documents/v1/DeleteDocument`, command).toPromise();
     }
 }
