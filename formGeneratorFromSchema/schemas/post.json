@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "Post",
+    "typeName": "Post",
+    "title": "Post schema",
+    "description": "",
+    "default": {},
+    "examples": [],
+    "required": [
+        "name",
+        "content",
+        "permaLink",
+        "status"        
+    ],
+    "additionalProperties": true,
+    "properties": {
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "Name of post",
+            "description": "Name of post"
+        },
+        "content": {
+            "$id": "#/properties/content",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "content of post",
+            "description": "content of post"
+        },
+        "createdBy": {
+            "$id": "#/properties/createdBy",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "createdBy",
+            "description": "createdBy"
+        },
+        "createdAt": {
+            "$id": "#/properties/createdAt",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "createdAt",
+            "description": "createdAt"
+        },
+        "updatedBy": {
+            "$id": "#/properties/updatedBy",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "updatedBy",
+            "description": "updatedBy"
+        },
+        "updatedAt": {
+            "$id": "#/properties/updatedAt",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "updatedAt",
+            "description": "updatedAt"
+        },
+        "tags": {
+            "$id": "#/properties/tags",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "tags",
+            "description": "tags"
+        },
+        "permaLink": {
+            "$id": "#/properties/permaLink",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "permaLink",
+            "description": "permaLink"
+        },
+        "status": {
+            "$id": "#/properties/status",
+            "type": "string",
+            "default": "",
+            "examples": [],
+            "title": "status",
+            "description": "status"
+        }
+    }
+}

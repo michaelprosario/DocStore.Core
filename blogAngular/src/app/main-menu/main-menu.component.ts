@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-main-menu',
@@ -13,31 +13,31 @@ export class MainMenuComponent implements OnInit {
   items: MenuItem[] = [];
 
   ngOnInit() {
-      this.items = [
-          {
-              label: 'Content',
-              expanded: true,
-              icon: 'pi pi-pw pi-file',
-              items: [{
-                      label: 'Posts', 
-                      icon: 'pi',
-                      expanded: true,
-                      items: [
-                          {label: 'Add post', icon: 'pi pi-plus'},
-                          {label: 'Posts', icon: 'pi pi-list'}
-                      ]
-                  },
-                  {
-                    label: 'Pages', 
-                    icon: 'pi',
-                    items: [
-                        {label: 'Add page', icon: 'pi pi-plus'},
-                        {label: 'Page', icon: 'pi pi-list'}
-                    ]
-                },                  
-              ]
-          },
-          
-      ];
+    this.items = [
+      {
+        label: 'Content',
+        expanded: true,
+        icon: 'pi pi-pw pi-file',
+        items: [{
+          label: 'Posts',
+          icon: 'pi',
+          expanded: true,
+          items: [
+            { label: 'Add post', icon: 'pi' },
+            { label: 'Posts', icon: 'pi' }
+          ]
+        },
+        {
+          label: 'Pages',
+          icon: 'pi',
+          items: [
+            { label: 'Add page', icon: 'pi' },
+            { label: 'Page', icon: 'pi' }
+          ]
+        },
+        ]
+      },
+
+    ];
   }
 }

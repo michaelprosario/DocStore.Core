@@ -7,12 +7,14 @@ import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MenuItem} from 'primeng/api';
 import {PanelMenuModule} from 'primeng/panelmenu';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    EditPostComponent
   ],
   imports: [
     AppRoutingModule,
