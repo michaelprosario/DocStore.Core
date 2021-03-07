@@ -50,7 +50,7 @@ function buildAsset(templatePath, templateName, path, assetName) {
 }
 
 let templateLocation = './templates/angular-forms/';
-let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/blogAngular/src/app";
+let basePath = "/Users/michaelrosario/Dev/GitHub/DocStore.Core/blogAngular/src/app/";
 const codeGen = new CodeGen();
 let testSchema = fs.readFileSync('./schemas/post.json', {encoding:'utf8', flag:'r'});
 testSchema = JSON.parse(testSchema);
