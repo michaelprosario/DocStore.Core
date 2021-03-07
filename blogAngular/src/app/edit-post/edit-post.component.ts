@@ -19,8 +19,6 @@ export class EditPostComponent implements OnInit {
   errors: string[];
   record: Post;
   recordId: string;
-  recordName: string = "Post";
-  statusText: string;
   viewModelReady: boolean;
 
   constructor(
@@ -31,8 +29,7 @@ export class EditPostComponent implements OnInit {
     this.editingNewRecord = true;
     this.errors = [];
     this.record = new Post();
-    this.recordId = "";
-    this.statusText = "";
+    this.recordId = "";    
     this.viewModelReady = false;
   }
 
@@ -151,7 +148,7 @@ export class EditPostComponent implements OnInit {
   }
 
   onDelete() {
-    if (confirm("Press OK to delete " + this.recordName)) {
+    if (confirm("Click OK to delete this record")) {
       const command = new DeleteDocumentCommand();
       command.id = this.currentDocument.id;
 
