@@ -9,5 +9,5 @@ export class Doc {
     public updatedBy: string = "";
     public deletedAt: string = "";
     public deletedBy: string = "";
-    public isDeleted: boolean;
+    public isDeleted: boolean = false;
 }

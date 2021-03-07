@@ -2,8 +2,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DocumentsService } from '../core/services/document.service';
 import { Ensure } from '../core/services/ensure';
-import { IEditPostView } from './IEditPostView';
-import { EditPostPresenter } from './EditPostPresenter';
+import { IEditPostView } from './edit-post-view';
+import { EditPostPresenter } from './edit-post-presenter';
 
 @Component({
   selector: 'app-edit-post',
@@ -53,6 +53,10 @@ export class EditPostComponent implements OnInit, IEditPostView {
       this.onClose();
     }
   }  
+
+  onSave(saveAndClose: boolean): void {
+    this.presenter.onSave(saveAndClose);
+  }
 
   onClose() {
     this.router.navigate(['/listPosts']);

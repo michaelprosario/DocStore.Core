@@ -6,7 +6,7 @@ import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
 import { Post } from './edit-post';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
-import { IEditPostView } from './IEditPostView';
+import { IEditPostView } from './edit-post-view';
 
 export class EditPostPresenter {
   currentDocument: Doc = new Doc();

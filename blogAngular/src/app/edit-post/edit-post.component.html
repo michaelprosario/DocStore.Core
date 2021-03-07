@@ -1,73 +1,76 @@
-<div class="card" *ngIf="record">
+<div class="card" *ngIf="presenter.record">
   <h3 class="card-header text-center font-weight-bold py-4">Post edit</h3>
   <div class="card-body">
     <div class="container">
-      <app-tool-bar (closeRecord)="onClose()" (deleteRecord)="onDelete()" (newRecord)="onNew()" (newRecord)="onNew()"
-        (saveAndCloseRecord)="onPostSave(true)" (saveRecord)="onPostSave(false)"></app-tool-bar>
-      <app-info-bar></app-info-bar>
+      <button (click)="onNew()">New Record</button>
+      <button (click)="onClose()">Close</button>
+      <button (click)="onDelete()">Delete</button>
+      <button (click)="onSave(true)">Save</button>
+      <button (click)="onSave(true)">Save and Close</button>
+      <hr>
 
       <fieldset>
         <div class="control-group">
           <label class="control-label" for="name">Name</label>
           <div class="controls">
             <input type="text" id="name" name="name"
-              placeholder="Enter Name" [(ngModel)]="record.name" />
+              placeholder="Enter Name" [(ngModel)]="presenter.record.name" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="content">Content</label>
           <div class="controls">
             <input type="text" id="content" name="content"
-              placeholder="Enter Content" [(ngModel)]="record.content" />
+              placeholder="Enter Content" [(ngModel)]="presenter.record.content" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="createdBy">Created by</label>
           <div class="controls">
             <input type="text" id="createdBy" name="createdBy"
-              placeholder="Enter Created by" [(ngModel)]="record.createdBy" />
+              placeholder="Enter Created by" [(ngModel)]="presenter.record.createdBy" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="createdAt">Created at</label>
           <div class="controls">
             <input type="text" id="createdAt" name="createdAt"
-              placeholder="Enter Created at" [(ngModel)]="record.createdAt" />
+              placeholder="Enter Created at" [(ngModel)]="presenter.record.createdAt" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="updatedBy">Updated by</label>
           <div class="controls">
             <input type="text" id="updatedBy" name="updatedBy"
-              placeholder="Enter Updated by" [(ngModel)]="record.updatedBy" />
+              placeholder="Enter Updated by" [(ngModel)]="presenter.record.updatedBy" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="updatedAt">Updated at</label>
           <div class="controls">
             <input type="text" id="updatedAt" name="updatedAt"
-              placeholder="Enter Updated at" [(ngModel)]="record.updatedAt" />
+              placeholder="Enter Updated at" [(ngModel)]="presenter.record.updatedAt" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="tags">Tags</label>
           <div class="controls">
             <input type="text" id="tags" name="tags"
-              placeholder="Enter Tags" [(ngModel)]="record.tags" />
+              placeholder="Enter Tags" [(ngModel)]="presenter.record.tags" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="permaLink">Perma link</label>
           <div class="controls">
             <input type="text" id="permaLink" name="permaLink"
-              placeholder="Enter Perma link" [(ngModel)]="record.permaLink" />
+              placeholder="Enter Perma link" [(ngModel)]="presenter.record.permaLink" />
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="status">Status</label>
           <div class="controls">
             <input type="text" id="status" name="status"
-              placeholder="Enter Status" [(ngModel)]="record.status" />
+              placeholder="Enter Status" [(ngModel)]="presenter.record.status" />
           </div>
         </div>
       </fieldset>

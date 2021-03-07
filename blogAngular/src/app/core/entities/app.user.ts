@@ -13,6 +13,6 @@ export class AppUser {
     public updatedBy: string = "";
     public deletedAt: string = "";
     public deletedBy: string = "";
-    public isDeleted: boolean;
-    public isActivated: boolean;
+    public isDeleted: boolean = false;
+    public isActivated: boolean = false;
 }

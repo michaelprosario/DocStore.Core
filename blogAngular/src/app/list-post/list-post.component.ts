@@ -9,7 +9,7 @@ import { IDocumentListResponse } from '../core/responses/document.list.response'
   templateUrl: './list-post.component.html'
 })
 export class ListPostComponent implements OnInit {
-  records: any[];
+  records: any[] = [];
 
   constructor(
     private router: Router,
@@ -31,10 +31,10 @@ export class ListPostComponent implements OnInit {
   }
 
   onNewRecord() {
-    this.router.navigate(['/newPost']);
+    this.router.navigate(['/app/newPost']);
   }
 
   openRecord(recordId: string) {
-    this.router.navigate(['/editPost/' + recordId]);
+    this.router.navigate(['/app/editPost/' + recordId]);
   }
 }

@@ -2,6 +2,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { ListPostComponent } from './list-post/list-post.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },  
@@ -9,8 +10,9 @@ const routes: Routes = [
     path: 'app', 
     component: HomeComponent,
     children: [
-      { path: '', redirectTo: 'edit-post', pathMatch: 'full' },
-      { path: 'edit-post', component: EditPostComponent }
+      { path: '', redirectTo: 'list-post', pathMatch: 'full' },
+      { path: 'edit-post', component: EditPostComponent },
+      { path: 'list-post', component: ListPostComponent }
     ]
   },
 ];
