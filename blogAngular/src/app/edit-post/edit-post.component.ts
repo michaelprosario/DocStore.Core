@@ -6,7 +6,6 @@ import { Doc } from '../core/entities/doc';
 import { DocumentsService } from '../core/services/document.service';
 import { GetDocumentQuery } from '../core/queries/get.document.query';
 import { IGenericResponse } from '../core/responses/generic.response';
-import { InfoBarComponent } from '../info-bar/info-bar.component';
 import { Post, PostValidator } from './edit-post';
 import { UpdateDocumentCommand } from '../core/commands/update.document.command';
 
@@ -14,11 +13,8 @@ import { UpdateDocumentCommand } from '../core/commands/update.document.command'
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html'
 })
-export class EditPostComponent implements OnInit {
-
-  @ViewChild(InfoBarComponent, { static: false }) infoBar: InfoBarComponent;
-
-  currentDocument: Doc;
+export class EditPostComponent implements OnInit { 
+  currentDocument: Doc = new Doc();
   editingNewRecord: boolean;
   errors: string[];
   record: Post;
@@ -45,7 +41,7 @@ export class EditPostComponent implements OnInit {
   }
 
   private setCurrentOwnerId() {
-    let userJson = localStorage.getItem("currentUser");
+    let userJson = localStorage.getItem("currentUser") || "{}";
     let currentUser = JSON.parse(userJson);
     let currentUserId = currentUser.id;    
   }
@@ -55,10 +51,10 @@ export class EditPostComponent implements OnInit {
     if (url.startsWith('/newPost')) {
       this.setCurrentOwnerId();
       this.editingNewRecord = true;
-      setTimeout(x => this.infoBar.displayInfo("Add new Post"), 1000);
+      this.displayInfo("Add new Post");
       this.viewModelReady = true;
     } else if (url.startsWith('/editPost')) {
-      this.recordId = this.route.snapshot.paramMap.get('id');
+      this.recordId = this.route.snapshot.paramMap.get('id') || '';
       this.loadRecord();
     }
   }
@@ -73,7 +69,7 @@ export class EditPostComponent implements OnInit {
         this.loadRecordFromResponse(response);
       })
       .catch(errors => {
-        this.infoBar.displayInfo("Application errors occured. See console");
+        this.displayInfo("Application errors occured. See console");
         console.log(errors);
       });
   }
@@ -82,19 +78,22 @@ export class EditPostComponent implements OnInit {
     this.recordId = response.document.id;
     this.currentDocument = response.document;
     this.record = JSON.parse(response.document.jsonData);
-    this.viewModelReady = true;
-    this.infoBar.displayTimeStamp(response.document.createdBy, response.document.createdAt)
+    this.viewModelReady = true;    
   }
 
-  afterSaveActions(context, saveAndClose) {
-    context.infoBar.displayInfo("Record saved");
+  displayInfo(messag: string){
+    alert(messag);
+  }
+
+  afterSaveActions(context: any, saveAndClose: boolean): void {
+    context.displayInfo("Record saved");
     if (saveAndClose) {
       context.onClose();
     }
   }
 
-  logError(currentContext, error) {
-    currentContext.infoBar.displayInfo("See console for errors");
+  logError(currentContext: any, error: string) {
+    currentContext.displayInfo("See console for errors");
     console.log(error);
   }
 
@@ -105,9 +104,9 @@ export class EditPostComponent implements OnInit {
 
       if (this.editingNewRecord) {
         const command = new AddDocumentCommand();
-        doc.createdAt = null;
-        doc.updatedAt = null;
-        doc.deletedAt = null;
+        doc.createdAt = null || "";
+        doc.updatedAt = null || "";
+        doc.deletedAt = null || "";
         command.document = doc;
         this.documentsService.add(command).then(data => {
           const response = data as unknown as IGenericResponse;
@@ -142,8 +141,13 @@ export class EditPostComponent implements OnInit {
   formIsOkay() {
     const results = new PostValidator().validate(this.record);
     this.errors = results.getFailureMessages();
-    this.infoBar.displayErrors(this.errors);
+    this.displayErrors(this.errors);
     return this.errors.length === 0;
+  }
+
+  displayErrors(errors: string[]){
+    console.log("errors.....");
+    console.log(errors);
   }
 
   onDelete() {
