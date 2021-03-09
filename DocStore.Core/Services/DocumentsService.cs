@@ -35,6 +35,7 @@ namespace DocStore.Core.Services
             if (!validationResult.IsValid)
             {
                 response.ValidationErrors = validationResult.Errors;
+                response.Code = ResponseCode.BadRequest;
                 return response;
             }
 
@@ -67,6 +68,7 @@ namespace DocStore.Core.Services
             if (!validationResult.IsValid)
             {
                 response.ValidationErrors = validationResult.Errors;
+                response.Code = ResponseCode.BadRequest;
                 return response;
             }
             

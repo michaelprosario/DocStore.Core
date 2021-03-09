@@ -3,10 +3,11 @@ import { DeleteDocumentCommand } from '../core/commands/delete.document.command'
 import { Doc } from '../core/entities/doc';
 import { DocumentsService } from '../core/services/document.service';
 import { GetDocumentQuery } from '../core/queries/get.document.query';
-import { IGenericResponse } from '../core/responses/generic.response';
-import { Post } from './edit-post';
-import { UpdateDocumentCommand } from '../core/commands/update.document.command';
 import { IEditPostView } from './edit-post-view';
+import { IGenericResponse } from '../core/responses/generic.response';
+import { Post, PostValidator } from './edit-post';
+import { UpdateDocumentCommand } from '../core/commands/update.document.command';
+import { v4 as uuidv4 } from 'uuid';
 
 export class EditPostPresenter {
   currentDocument: Doc = new Doc();
@@ -25,10 +26,12 @@ export class EditPostPresenter {
     if (handleNewRecord) {
       this.currentUser = this.view.getCurrentUser();
       this.editingNewRecord = true;
-      this.view.displayInfo("Add new Post");
+      this.record.id = uuidv4();
+      this.view.displayInfo("Add new post");
     } else {
       this.recordId = this.view.getPropertyFromUrl('id');
       this.loadRecord();
+      this.view.displayInfo("Edit post");
     }
   }
 
@@ -56,13 +59,20 @@ export class EditPostPresenter {
   private getDocFromRecord() {
     const doc = this.currentDocument;
     doc.jsonData = JSON.stringify(this.record);
+    doc.collectionName = "Post";
+    doc.name = this.record.name;
     return doc;
   }
 
-  formIsOkay() {
-    // todo - need to fix validator
-    this.errors = [];
-    this.view.displayErrors(this.errors);
+  formIsOkay() {    
+    const validator = new PostValidator();
+    const validationResults = validator.validate(this.record);
+    console.log(validationResults)
+    this.errors = validationResults.getFailureMessages();
+    if(this.errors.length > 0) {
+      this.view.displayErrors(this.errors);
+    }
+
     return this.errors.length === 0;
   }
 
@@ -86,11 +96,17 @@ export class EditPostPresenter {
 
       if (this.editingNewRecord) {
         const command = new AddDocumentCommand();
-        doc.createdAt = null || "";
-        doc.updatedAt = null || "";
-        doc.deletedAt = null || "";
         command.document = doc;
+        
         this.documentsService.add(command).then(data => {
+          
+          // @ts-ignore
+          if(!data || data.code !== 200){
+            alert("Error saving record");
+            console.log(data);
+            return;
+          }
+
           const response = data as unknown as IGenericResponse;
           this.recordId = response.recordId;
           this.loadRecord();

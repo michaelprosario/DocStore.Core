@@ -9,18 +9,18 @@ import { EditPostPresenter } from './edit-post-presenter';
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html'
 })
-export class EditPostComponent implements OnInit, IEditPostView { 
-  
-  presenter: EditPostPresenter;
+export class EditPostComponent implements OnInit, IEditPostView {
+
   infoBarMessage: string = "";
+  presenter: EditPostPresenter;
+  showErrors: boolean = false;
 
   constructor(
     private documentsService: DocumentsService,
     private route: ActivatedRoute,
     private router: Router
-  ) 
-  {
-    this.presenter = new EditPostPresenter(this, documentsService);    
+  ) {
+    this.presenter = new EditPostPresenter(this, documentsService);
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class EditPostComponent implements OnInit, IEditPostView {
     return this.route.snapshot.paramMap.get(property) || '';
   }
 
-  displayInfo(message: string){
+  displayInfo(message: string) {
     this.infoBarMessage = message;
   }
 
@@ -53,7 +53,7 @@ export class EditPostComponent implements OnInit, IEditPostView {
     if (saveAndClose) {
       this.onClose();
     }
-  }  
+  }
 
   onSave(saveAndClose: boolean): void {
     this.presenter.onSave(saveAndClose);
@@ -63,9 +63,8 @@ export class EditPostComponent implements OnInit, IEditPostView {
     this.router.navigate(['/app/list-post']);
   }
 
-  displayErrors(errors: string[]){
-    console.log("errors.....");
-    console.log(errors);
+  displayErrors(errors: string[]) {
+    this.showErrors = true;
   }
 
   onDelete() {
