@@ -2,11 +2,12 @@
   <h3 class="card-header text-center font-weight-bold py-4">Post edit</h3>
   <div class="card-body">
     <div class="container">
-      <button (click)="onNew()" class="button">New Record</button>&nbsp;
-      <button (click)="onClose()" class="button">Close</button>&nbsp;
-      <button (click)="onDelete()" class="button">Delete</button>&nbsp;
+      <button (click)="onNew()" class="button">New Record</button>&nbsp;      
       <button (click)="onSave(false)" class="button">Save</button>&nbsp;
       <button (click)="onSave(true)" class="button">Save and Close</button>&nbsp;
+      <button (click)="onDelete()" class="button">Delete</button>&nbsp;
+      <button (click)="onClose()" class="button">Close</button>&nbsp;
+
       <br>
       <alert type="warning">
         {{infoBarMessage}}
