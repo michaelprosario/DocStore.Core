@@ -1,9 +1,11 @@
+import { AlertModule } from 'ngx-foundation';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { ModalModule } from 'ngx-foundation';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MenuItem} from 'primeng/api';
@@ -21,11 +23,13 @@ import { ListPostComponent } from './list-post/list-post.component';
     ListPostComponent
   ],
   imports: [
+    AlertModule.forRoot(),
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    ModalModule.forRoot(),
     PanelMenuModule  
   ],
   providers: [],

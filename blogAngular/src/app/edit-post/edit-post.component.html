@@ -8,7 +8,9 @@
       <button (click)="onSave(true)"  class="button">Save</button>&nbsp;
       <button (click)="onSave(true)"  class="button">Save and Close</button>&nbsp;
       <br>
-
+      <alert type="warning">
+        {{infoBarMessage}}
+      </alert>
       <fieldset>
         <div class="control-group">
           <label class="control-label" for="name">Name</label>

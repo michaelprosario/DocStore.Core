@@ -12,6 +12,7 @@ import { EditPostPresenter } from './edit-post-presenter';
 export class EditPostComponent implements OnInit, IEditPostView { 
   
   presenter: EditPostPresenter;
+  infoBarMessage: string = "";
 
   constructor(
     private documentsService: DocumentsService,
@@ -43,8 +44,8 @@ export class EditPostComponent implements OnInit, IEditPostView {
     return this.route.snapshot.paramMap.get(property) || '';
   }
 
-  displayInfo(messag: string){
-    alert(messag);
+  displayInfo(message: string){
+    this.infoBarMessage = message;
   }
 
   afterSaveActions(saveAndClose: boolean): void {
