@@ -1,14 +1,17 @@
 <p-panel header="Edit Post">
-<div class="card" *ngIf="presenter.record">
-  
-  <div class="card-body">
-    <div class="container">
-      <button (click)="onNew()" class="button">New Record</button>&nbsp;      
-      <button (click)="onSave(false)" class="button">Save</button>&nbsp;
-      <button (click)="onSave(true)" class="button">Save and Close</button>&nbsp;
-      <button (click)="onDelete()" class="button">Delete</button>&nbsp;
-      <button (click)="onClose()" class="button">Close</button>&nbsp;
+  <div class="card" *ngIf="presenter.record">
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <p-button label="New" icon="pi pi-plus" (click)="onNew()"></p-button> &nbsp;
+        <p-button label="Save" icon="pi pi-save" (click)="onSave(false)"></p-button>&nbsp;
+        <p-button label="Save & Close" icon="pi pi-save" (click)="onSave(true)"></p-button>&nbsp;
+        <p-button label="Delete" icon="pi pi-trash" (click)="onSave(true)"></p-button>&nbsp;
+        <p-button label="Close" icon="pi pi-times" (click)="onClose()"></p-button>&nbsp;
+      </div>
+    </p-toolbar>
 
+
+    <div class="container">
       <br>
       <alert type="warning">
         {{infoBarMessage}}
@@ -51,12 +54,12 @@
 
     </div>
   </div>
-</div>
 
-<p-dialog header="Please correct the following" [(visible)]="showErrors">
-  <ul *ngFor="let error of presenter.errors">
-    <li>{{ error }}</li>
-  </ul>
-</p-dialog>
+
+  <p-dialog header="Please correct the following" [(visible)]="showErrors">
+    <ul *ngFor="let error of presenter.errors">
+      <li>{{ error }}</li>
+    </ul>
+  </p-dialog>
 
 </p-panel>

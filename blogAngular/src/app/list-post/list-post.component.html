@@ -1,26 +1,29 @@
-  
-  <p-panel header="Posts">
-    <div id="table" class="table-editable">
-      <button type="button" title="New" class="button" (click)="onNewRecord()">New</button>
-      <br><br>
-      <table class="table table-responsive-md table-striped">
-        <tr>
-          <th>Title</th>
-          <th>Action</th>
-        </tr>
-        <tbody>
-          <tr *ngFor="let record of records">
-            <td class="pt-3-half">
-              {{record.name}}
-            </td>
-            <td>
-              <span class="">
-                <button type="button" title="Edit record" class="button"
-                  (click)="openRecord(record.id)">Edit</button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<p-panel header="Posts">
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <p-button label="New" icon="pi pi-plus" (click)="onNewRecord()"></p-button>
     </div>
+  </p-toolbar>
+
+  <div id="table" class="table-editable">
+    <br><br>
+    <table class="table table-responsive-md table-striped">
+      <tr>
+        <th>Title</th>
+        <th>Action</th>
+      </tr>
+      <tbody>
+        <tr *ngFor="let record of records">
+          <td class="pt-3-half">
+            {{record.name}}
+          </td>
+          <td>
+            <span class="">
+              <button type="button" title="Edit record" class="button" (click)="openRecord(record.id)">Edit</button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </p-panel>
