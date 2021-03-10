@@ -15,6 +15,7 @@ import { MenuItem } from 'primeng/api';
 import { ModalModule } from 'ngx-foundation';
 import { NgModule } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     FormsModule,
     HttpClientModule,
     ModalModule.forRoot(),
+    PanelModule,
     PanelMenuModule
   ],
   providers: [],

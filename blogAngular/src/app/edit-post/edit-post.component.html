@@ -1,5 +1,6 @@
+<p-panel header="Edit Post">
 <div class="card" *ngIf="presenter.record">
-  <h3 class="card-header text-center font-weight-bold py-4">Post edit</h3>
+  
   <div class="card-body">
     <div class="container">
       <button (click)="onNew()" class="button">New Record</button>&nbsp;      
@@ -57,3 +58,5 @@
     <li>{{ error }}</li>
   </ul>
 </p-dialog>
+
+</p-panel>
