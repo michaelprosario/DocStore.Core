@@ -1,33 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentsService } from '../core/services/document.service';
-import { GetDocumentsByCollectionQuery } from '../core/queries/get.documents.by.collection.query';
-import { IDocumentListResponse } from '../core/responses/document.list.response';
+import { IListPostView } from './list-post-view';
+import { ListPostPresenter } from './list-post-presenter';
 
 @Component({
   selector: 'app-list-post',
   templateUrl: './list-post.component.html'
 })
-export class ListPostComponent implements OnInit {
+export class ListPostComponent implements OnInit,IListPostView {
   records: any[] = [];
+  presenter: ListPostPresenter; 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private docsService: DocumentsService
-  ) { }
+    private docsService: DocumentsService    
+  ) {
+    this.presenter = new ListPostPresenter(docsService, this);
+  }
 
-  ngOnInit() {
-    const query = new GetDocumentsByCollectionQuery();
-    query.collection = 'Post';
+  ngOnInit() {   
+    this.presenter.getRecordsFromServer();
+  }
 
-    this.docsService.getAll(query).then(serverResponse => {
-      const response = serverResponse as unknown as IDocumentListResponse;
-      this.records = response.documents;
-    }).catch(error => {
-      console.log('Error on list document operation');
-      console.log(error);
-    })
+  setRecords(records: []){
+    this.records = records;
   }
 
   onNewRecord() {
