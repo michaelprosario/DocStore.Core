@@ -13,31 +13,17 @@ export class MainMenuComponent implements OnInit {
   items: MenuItem[] = [];
 
   ngOnInit() {
-    this.items = [
+    this.items = [    
       {
-        label: 'Content',
-        expanded: true,
-        icon: 'pi pi-pw pi-file',
-        items: [{
-          label: 'Posts',
-          icon: 'pi',
-          expanded: true,
-          items: [
-            { label: 'Add post', icon: 'pi' },
-            { label: 'Posts', icon: 'pi' }
-          ]
-        },
-        {
-          label: 'Pages',
-          icon: 'pi',
-          items: [
-            { label: 'Add page', icon: 'pi' },
-            { label: 'Page', icon: 'pi' }
-          ]
-        },
-        ]
+        label: 'Posts',
+        icon: 'pi',
+        routerLink: '/app/list-post'          
       },
-
+      {
+        label: 'Pages',
+        icon: 'pi',
+        routerLink: '/app/list-page'          
+      }
     ];
   }
 }

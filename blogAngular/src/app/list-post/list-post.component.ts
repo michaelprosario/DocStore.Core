@@ -6,7 +6,8 @@ import { ListPostPresenter } from './list-post-presenter';
 
 @Component({
   selector: 'app-list-post',
-  templateUrl: './list-post.component.html'
+  templateUrl: './list-post.component.html',
+  styleUrls: ['./list-post.component.scss']
 })
 export class ListPostComponent implements OnInit,IListPostView {
   records: any[] = [];

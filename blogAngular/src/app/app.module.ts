@@ -17,6 +17,7 @@ import { ModalModule } from 'ngx-foundation';
 import { NgModule } from '@angular/core';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { PanelModule } from 'primeng/panel';
+import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
 
 @NgModule({
@@ -39,6 +40,7 @@ import {ToolbarModule} from 'primeng/toolbar';
     ModalModule.forRoot(),
     PanelModule,
     PanelMenuModule,
+    TableModule,
     ToolbarModule
   ],
   providers: [],

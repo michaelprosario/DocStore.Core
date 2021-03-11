@@ -1,3 +1,4 @@
+
 <p-panel header="Posts">
   <p-toolbar>
     <div class="p-toolbar-group-left">
@@ -5,25 +6,21 @@
     </div>
   </p-toolbar>
 
-  <div id="table" class="table-editable">
-    <br><br>
-    <table class="table table-responsive-md table-striped">
-      <tr>
-        <th>Title</th>
-        <th>Action</th>
-      </tr>
-      <tbody>
-        <tr *ngFor="let record of records">
-          <td class="pt-3-half">
-            {{record.name}}
-          </td>
-          <td>
-            <span class="">
-              <button type="button" title="Edit record" class="button" (click)="openRecord(record.id)">Edit</button>
-            </span>
-          </td>
+  <div class="card">
+    <p-table [value]="records" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" styleClass="p-datatable-striped"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+      <ng-template pTemplate="body" let-record>
+        <tr (click)="openRecord(record.id)" class="tableRow">
+          <td>{{record.name}}</td>
+        </tr>
+      </ng-template>
+
+    </p-table>
   </div>
+
 </p-panel>
